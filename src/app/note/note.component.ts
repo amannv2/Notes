@@ -1,4 +1,4 @@
-import { ViewChild } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import * as Quill from 'quill';
@@ -6,6 +6,18 @@ import * as Quill from 'quill';
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0 }),
+        animate('0.5s ease-out', style({ height: 0, opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: 0, opacity: 1 }),
+        animate('0.5s ease-in', style({ height: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class NoteComponent implements OnInit {
   title = '';
@@ -14,6 +26,8 @@ export class NoteComponent implements OnInit {
   lockBtn = 'lock';
   editor: Quill;
   modules = {};
+  activeColor = '#0e9aa7';
+  showColors = false;
 
   // blured = false;
   // focused = false;
@@ -67,6 +81,18 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  changeNoteColor(hexCode): void {
+    this.activeColor = hexCode;
+  }
+
+  getColor(): string {
+    return this.activeColor;
+  }
+
+  onDelete(): void {
+    //
+  }
 
   onLock(): void {
     this.locked = !this.locked;

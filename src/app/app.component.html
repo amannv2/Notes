@@ -1,15 +1,9 @@
 <div class="container">
   <div class="row page-title">Quick Notes</div>
-  <div class="row page-header">
-    <button
-      class="pull-right add-new"
-      mat-fab
-      color="accent"
-      (click)="addNew()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  <br />
+  <button class="pull-right add-new" mat-fab color="accent" (click)="addNew()">
+    <mat-icon>add</mat-icon>
+  </button>
   <div class="row notes-container">
     <app-note *ngFor="let note of notes"></app-note>
   </div>

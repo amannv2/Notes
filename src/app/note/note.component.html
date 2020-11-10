@@ -1,4 +1,4 @@
-<mat-card class="note-card">
+<mat-card class="note-card" [ngStyle]="{ backgroundColor: getColor() }">
   <mat-card-header>
     <mat-card-title>
       <mat-form-field>
@@ -8,6 +8,7 @@
           type="text"
           [(ngModel)]="title"
           placeholder="Note Title"
+          [disabled]="locked"
         />
       </mat-form-field>
     </mat-card-title>
@@ -27,8 +28,57 @@
     </div>
   </mat-card-content>
   <mat-card-footer class="footer">
-    <button mat-button class="pull-right" (click)="onLock()">
+    <button
+      mat-fab
+      class="grad-colors"
+      (click)="showColors = !showColors"
+    ></button>
+
+    <div *ngIf="showColors" [@inOutAnimation]>
+      <button
+        mat-fab
+        class="note-colors c4a4e4d"
+        (click)="changeNoteColor('#4a4e4d')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors c0e9aa7"
+        (click)="changeNoteColor('#0e9aa7')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors c3da4ab"
+        (click)="changeNoteColor('#3da4ab')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors cf6cd61"
+        (click)="changeNoteColor('#f6cd61')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors cfe8a71"
+        (click)="changeNoteColor('#fe8a71')"
+      ></button>
+    </div>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn"
+      (click)="onLock()"
+      aria-label="Lock Note"
+    >
       <mat-icon>{{ lockBtn }}</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn"
+      (click)="onDelete()"
+      aria-label="Lock Note"
+    >
+      <mat-icon>delete</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
