@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { NotesService } from '../notes.service'
 import * as Quill from 'quill';
 @Component({
   selector: 'app-note',
@@ -18,7 +19,9 @@ import * as Quill from 'quill';
     ]),
   ],
 })
+
 export class NoteComponent implements OnInit {
+  id = 0;
   title = '';
   content = '';
   locked = true;
@@ -55,7 +58,8 @@ export class NoteComponent implements OnInit {
   //   this.blured = true;
   // }
 
-  constructor() {
+  constructor(private notesService: NotesService) {            
+    this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -90,7 +94,7 @@ export class NoteComponent implements OnInit {
   }
 
   onDelete(): void {
-    //
+    this.notesService.deleteNote(this.id);
   }
 
   onLock(): void {

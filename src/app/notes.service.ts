@@ -1,24 +1,39 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NoteComponent } from './note/note.component';
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
-  notes = [];
+  notes : NoteComponent[] = [];
+  counter = 0;
+  notesObs: Observable<NoteComponent[]>;
 
   constructor() {
     this.addNew();
+    this.notesObs = new Observable((observer) => {
+      observer.next(this.notes);
+    });
   }
 
   addNew(): void {
-    this.notes.push(new NoteComponent());
+    this.counter++;
+    let id = this.counter;
+    let newNote = new NoteComponent(this);
+    this.notes.push(newNote);
+    console.log(newNote);
   }
 
-  getNotes(): NoteComponent[] {
-    return this.notes;
+  getCounter(){
+    return this.counter;
   }
 
-  deleteNote(param: any): void {
-    // some code
+  getNotes() {
+    return this.notesObs;
+  }
+
+  deleteNote(targetId: any): void {
+    this.notes = this.notes.filter(({id}) => id != targetId);      
+    // send data on update
   }
 
   pinNote(param: any): void {
