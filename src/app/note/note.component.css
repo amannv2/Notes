@@ -27,6 +27,8 @@
 
 .lock-btn {
   margin-left: 10px;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .grad-colors {

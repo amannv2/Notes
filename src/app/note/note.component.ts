@@ -1,6 +1,5 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import * as Quill from 'quill';
 @Component({
   selector: 'app-note',

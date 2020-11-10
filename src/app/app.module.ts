@@ -9,6 +9,7 @@ import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
+import { NotesService } from './notes.service';
 
 @NgModule({
   declarations: [AppComponent, NoteComponent],
@@ -22,7 +23,7 @@ import { NoteComponent } from './note/note.component';
     MatIconModule,
     QuillModule.forRoot(),
   ],
-  providers: [],
+  providers: [NotesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -5,6 +5,8 @@
     <mat-icon>add</mat-icon>
   </button>
   <div class="row notes-container">
-    <app-note *ngFor="let note of notes"></app-note>
+    <!-- if things don't work use following line and make notesService public -- NOT IDEAL -->
+    <!-- <app-note *ngFor="let note of notesService.getNotes()" @fadeIn></app-note> -->
+    <app-note *ngFor="let note of notes" @fadeIn></app-note>
   </div>
 </div>
