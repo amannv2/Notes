@@ -38,9 +38,8 @@
   background: #555;
 }
 
-:host ::ng-deep .ck-editor__editable_inline {
-  color: black;
-  height: 150px;
+::ng-deep .ck-editor__editable {
+  min-height: 200px !important;
 }
 
 .saved-data {
