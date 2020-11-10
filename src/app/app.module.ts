@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
@@ -20,7 +20,7 @@ import { NoteComponent } from './note/note.component';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    CKEditorModule,
+    QuillModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

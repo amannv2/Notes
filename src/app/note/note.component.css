@@ -20,6 +20,10 @@
   margin-top: -20px;
 }
 
+.footer {
+  padding-right: 15px;
+}
+
 /* css for scrollbars */
 
 ::-webkit-scrollbar {
@@ -36,16 +40,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-::ng-deep .ck-editor__editable {
-  min-height: 200px !important;
-}
-
-.saved-data {
-  height: 150px;
-}
-
-.footer {
-  padding-right: 15px;
 }

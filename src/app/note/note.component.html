@@ -13,24 +13,22 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="note-content-container">
-    <ng-container *ngIf="editMode; else elseTemplate">
-      <ckeditor #myEditor [editor]="Editor" data="{{ content }}"></ckeditor>
-    </ng-container>
-    <ng-template #elseTemplate>
-      <div class="saved-data" innerHTML="{{ content }}"></div>
-    </ng-template>
+    <!-- EDITOR -->
+    <div id="quill">
+      <quill-editor
+        id="editor"
+        theme="bubble"
+        [ngModel]="content"
+        [modules]="modules"
+        placeholder="Type here..."
+        [styles]="{ height: '200px' }"
+        [disabled]="locked"
+      ></quill-editor>
+    </div>
   </mat-card-content>
   <mat-card-footer class="footer">
-    <button
-      mat-button
-      class="pull-right edit-btn"
-      (click)="onCancel()"
-      *ngIf="editMode"
-    >
-      Cancel
-    </button>
-    <button mat-button class="pull-right edit-btn" (click)="onEdit()">
-      {{ editBtn }}
+    <button mat-button class="pull-right" (click)="onLock()">
+      <mat-icon>{{ lockBtn }}</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
