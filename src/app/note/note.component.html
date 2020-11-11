@@ -12,6 +12,16 @@
         />
       </mat-form-field>
     </mat-card-title>
+    
+    <button
+      mat-mini-fab      
+      color="accent"
+      class="pull-right lock-btn top-right"
+      (click)="onDelete()"
+      aria-label="Lock Note"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content class="note-content-container">
     <!-- EDITOR -->
@@ -78,15 +88,6 @@
       aria-label="Lock Note"
     >
       <mat-icon>{{ lockBtn }}</mat-icon>
-    </button>
-    <button
-      mat-mini-fab
-      color="accent"
-      class="pull-right lock-btn"
-      (click)="onDelete()"
-      aria-label="Lock Note"
-    >
-      <mat-icon>delete</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
