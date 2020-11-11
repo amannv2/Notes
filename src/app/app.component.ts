@@ -1,7 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { NoteComponent } from './note/note.component';
-import { NotesService } from './notes.service';
 
 @Component({
   selector: 'app-root',
@@ -18,22 +16,13 @@ import { NotesService } from './notes.service';
 })
 export class AppComponent implements OnInit {
   title = 'Notes';
-  notes : NoteComponent[] = [];
+  opened = false;
 
-  constructor(private notesService: NotesService) {
-    // this.notes = this.notesService.getNotes();    
-    this.notesService.getNotes().subscribe((data) => {
-      this.notes = data;
-    });
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    setInterval(()=>{
-      this.notes = this.notesService.notes;
-    }, 300);
-  }
+  ngOnInit(): void {}
 
-  addNew(): void {
-    this.notesService.addNew();
+  showSideBar(): void {
+    this.opened = !this.opened;
   }
 }

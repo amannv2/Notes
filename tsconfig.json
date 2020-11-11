@@ -7,8 +7,9 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "target": "es2015"
+    "target": "es2015",
     // other options
+    "experimentalDecorators": true
   },
   "files": [],
   "references": [

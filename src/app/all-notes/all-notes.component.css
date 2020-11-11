@@ -3,33 +3,6 @@
   height: 100%;
 }
 
-.sidebar {
-  width: 10%;
-}
-
-.example-container {
-  /* width: 500px; */
-  /* height: 300px; */
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-container {
-  margin: 0 5px;
-}
-
-.nav-container {
-  justify-content: flex-end;
-  display: flex;
-  width: 100%;
-}
-
 .add-new {
   position: fixed;
   width: 60px;

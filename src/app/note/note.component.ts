@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Injectable, OnInit } from '@angular/core';
-import { NotesService } from '../notes.service'
+import { NotesService } from '../notes.service';
 import * as Quill from 'quill';
 @Component({
   selector: 'app-note',
@@ -19,17 +19,17 @@ import * as Quill from 'quill';
     ]),
   ],
 })
-
 export class NoteComponent implements OnInit {
   id = 0;
   title = '';
   content = '';
-  locked = true;
-  lockBtn = 'lock';
+  locked = false;
+  pinned = false;
   editor: Quill;
   modules = {};
   activeColor = '#0e9aa7';
   showColors = false;
+  titlePlaceholder = 'Note Title';
 
   // blured = false;
   // focused = false;
@@ -58,7 +58,7 @@ export class NoteComponent implements OnInit {
   //   this.blured = true;
   // }
 
-  constructor(private notesService: NotesService) {            
+  constructor(private notesService: NotesService) {
     this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
@@ -85,6 +85,13 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  getTitlePlaceholder(): string {
+    if (this.title.length > 0) {
+      return '';
+    }
+    return 'Note Title';
+  }
+
   changeNoteColor(hexCode): void {
     this.activeColor = hexCode;
   }
@@ -97,12 +104,12 @@ export class NoteComponent implements OnInit {
     this.notesService.deleteNote(this.id);
   }
 
+  onPin(): void {
+    this.pinned = !this.pinned;
+    this.notesService.pinNote(this.id);
+  }
+
   onLock(): void {
     this.locked = !this.locked;
-    if (this.lockBtn === 'lock_open') {
-      this.lockBtn = 'lock';
-    } else {
-      this.lockBtn = 'lock_open';
-    }
   }
 }

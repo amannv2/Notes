@@ -4,7 +4,7 @@ import { NoteComponent } from './note/note.component';
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
-  notes : NoteComponent[] = [];
+  notes: NoteComponent[] = [];
   counter = 0;
   notesObs: Observable<NoteComponent[]>;
 
@@ -17,26 +17,30 @@ export class NotesService {
 
   addNew(): void {
     this.counter++;
-    let id = this.counter;
-    let newNote = new NoteComponent(this);
+    const newNote = new NoteComponent(this);
     this.notes.push(newNote);
-    console.log(newNote);
+    // console.log(newNote);
   }
 
-  getCounter(){
+  getCounter(): number {
     return this.counter;
   }
 
-  getNotes() {
+  getNotes(): Observable<NoteComponent[]> {
     return this.notesObs;
   }
 
   deleteNote(targetId: any): void {
-    this.notes = this.notes.filter(({id}) => id != targetId);      
+    this.notes = this.notes.filter(({ id }) => id !== targetId);
     // send data on update
   }
 
-  pinNote(param: any): void {
-    //
+  pinNote(targetId: any): void {
+    this.notes.forEach((note, i): void => {
+      if (note.id === targetId) {
+        this.notes.splice(i, 1);
+        this.notes.unshift(note);
+      }
+    });
   }
 }

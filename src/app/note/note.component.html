@@ -7,7 +7,7 @@
           matInput
           type="text"
           [(ngModel)]="title"
-          placeholder="Note Title"
+          [placeholder]="getTitlePlaceholder()"
           [disabled]="locked"
         />
       </mat-form-field>
@@ -66,9 +66,15 @@
       mat-mini-fab
       color="accent"
       class="pull-right lock-btn"
-      aria-label="Lock Note"
+      aria-label="Pin Note"
+      (click)="onPin()"
     >
-      <mat-icon fontSet="material-icons-outlined">push_pin</mat-icon>
+      <ng-container *ngIf="!pinned; else elsePin">
+        <mat-icon fontSet="material-icons-outlined">push_pin</mat-icon>
+      </ng-container>
+      <ng-template #elsePin>
+        <mat-icon>push_pin</mat-icon>
+      </ng-template>
     </button>
     <button
       mat-mini-fab
@@ -77,16 +83,21 @@
       (click)="onLock()"
       aria-label="Lock Note"
     >
-      <mat-icon>{{ lockBtn }}</mat-icon>
+      <ng-container *ngIf="locked; else elseDelete">
+        <mat-icon>lock</mat-icon>
+      </ng-container>
+      <ng-template #elseDelete>
+        <mat-icon>lock_open</mat-icon>
+      </ng-template>
     </button>
     <button
       mat-mini-fab
       color="accent"
       class="pull-right lock-btn"
       (click)="onDelete()"
-      aria-label="Lock Note"
+      aria-label="Delete Note"
     >
-      <mat-icon>delete</mat-icon>
+      <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
