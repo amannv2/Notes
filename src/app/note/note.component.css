@@ -31,6 +31,10 @@
   box-shadow: none;
 }
 
+.top-right{
+  margin-left: auto;
+}
+
 .grad-colors {
   width: 25px;
   height: 25px;

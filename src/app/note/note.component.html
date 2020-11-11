@@ -12,6 +12,16 @@
         />
       </mat-form-field>
     </mat-card-title>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn top-right"
+      (click)="onDelete()"
+      aria-label="Delete Note"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content class="note-content-container">
     <!-- EDITOR -->
@@ -89,15 +99,6 @@
       <ng-template #elseDelete>
         <mat-icon>lock_open</mat-icon>
       </ng-template>
-    </button>
-    <button
-      mat-mini-fab
-      color="accent"
-      class="pull-right lock-btn"
-      (click)="onDelete()"
-      aria-label="Delete Note"
-    >
-      <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>
