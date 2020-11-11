@@ -1,4 +1,4 @@
-<mat-card class="note-card">
+<mat-card class="note-card" [ngStyle]="{ backgroundColor: getColor() }">
   <mat-card-header>
     <mat-card-title>
       <mat-form-field>
@@ -7,30 +7,98 @@
           matInput
           type="text"
           [(ngModel)]="title"
-          placeholder="Note Title"
+          [placeholder]="getTitlePlaceholder()"
+          [disabled]="locked"
         />
       </mat-form-field>
     </mat-card-title>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn top-right"
+      (click)="onDelete()"
+      aria-label="Delete Note"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content class="note-content-container">
-    <ng-container *ngIf="editMode; else elseTemplate">
-      <ckeditor #myEditor [editor]="Editor" data="{{ content }}"></ckeditor>
-    </ng-container>
-    <ng-template #elseTemplate>
-      <div class="saved-data" innerHTML="{{ content }}"></div>
-    </ng-template>
+    <!-- EDITOR -->
+    <div id="quill">
+      <quill-editor
+        id="editor"
+        theme="bubble"
+        [ngModel]="content"
+        [modules]="modules"
+        placeholder="Type here..."
+        [styles]="{ height: '200px' }"
+        [disabled]="locked"
+      ></quill-editor>
+    </div>
   </mat-card-content>
   <mat-card-footer class="footer">
     <button
-      mat-button
-      class="pull-right edit-btn"
-      (click)="onCancel()"
-      *ngIf="editMode"
+      mat-fab
+      class="grad-colors"
+      (click)="showColors = !showColors"
+    ></button>
+
+    <div *ngIf="showColors" [@inOutAnimation]>
+      <button
+        mat-fab
+        class="note-colors c4a4e4d"
+        (click)="changeNoteColor('#4a4e4d')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors c0e9aa7"
+        (click)="changeNoteColor('#0e9aa7')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors c3da4ab"
+        (click)="changeNoteColor('#3da4ab')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors cf6cd61"
+        (click)="changeNoteColor('#f6cd61')"
+      ></button>
+      <button
+        mat-fab
+        class="note-colors cfe8a71"
+        (click)="changeNoteColor('#fe8a71')"
+      ></button>
+    </div>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn"
+      aria-label="Pin Note"
+      (click)="onPin()"
     >
-      Cancel
+      <ng-container *ngIf="!pinned; else elsePin">
+        <mat-icon fontSet="material-icons-outlined">push_pin</mat-icon>
+      </ng-container>
+      <ng-template #elsePin>
+        <mat-icon>push_pin</mat-icon>
+      </ng-template>
     </button>
-    <button mat-button class="pull-right edit-btn" (click)="onEdit()">
-      {{ editBtn }}
+    <button
+      mat-mini-fab
+      color="accent"
+      class="pull-right lock-btn"
+      (click)="onLock()"
+      aria-label="Lock Note"
+    >
+      <ng-container *ngIf="locked; else elseDelete">
+        <mat-icon>lock</mat-icon>
+      </ng-container>
+      <ng-template #elseDelete>
+        <mat-icon>lock_open</mat-icon>
+      </ng-template>
     </button>
   </mat-card-footer>
 </mat-card>

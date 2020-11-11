@@ -1,41 +1,115 @@
-import { ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { NotesService } from '../notes.service';
+import * as Quill from 'quill';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ height: 0, opacity: 0 }),
+        animate('0.5s ease-out', style({ height: 0, opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: 0, opacity: 1 }),
+        animate('0.5s ease-in', style({ height: 0, opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class NoteComponent implements OnInit {
+  id = 0;
   title = '';
-  content = 'Click edit to add content';
-  public Editor = ClassicEditor;
-  editMode = false;
-  editBtn = 'Edit';
-  @ViewChild('myEditor') myEditor: any;
+  content = '';
+  locked = false;
+  pinned = false;
+  editor: Quill;
+  modules = {};
+  activeColor = '#0e9aa7';
+  showColors = false;
+  titlePlaceholder = 'Note Title';
 
-  constructor() {}
+  // blured = false;
+  // focused = false;
+  //
+  // (onEditorChanged)="changedEditor($event)"
+  // changedEditor(event: EditorChangeContent | EditorChangeSelection): void {
+  // tslint:disable-next-line:no-console
+  // console.log('editor-change', event);
+  // }
+  //
+  // created(event) {
+  //   // tslint:disable-next-line:no-console
+  //   console.log('editor-created', event);
+  // }
+  // focus($event) {
+  //   // tslint:disable-next-line:no-console
+  //   console.log('focus', $event);
+  //   this.focused = true;
+  //   this.blured = false;
+  // }
+  //
+  // blur($event) {
+  //   // tslint:disable-next-line:no-console
+  //   console.log('blur', $event);
+  //   this.focused = false;
+  //   this.blured = true;
+  // }
+
+  constructor(private notesService: NotesService) {
+    this.id = this.notesService.getCounter();
+    this.modules = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+
+        [{ header: 1 }, { header: 2 }], // custom button values
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ direction: 'rtl' }], // text direction
+
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
+
+        ['clean'], // remove formatting button
+
+        ['link', 'image'], // link and image
+      ],
+    };
+  }
 
   ngOnInit(): void {}
 
-  onEdit(): void {
-    this.editMode = !this.editMode;
-    if (this.editBtn === 'Edit') {
-      this.editBtn = 'Save';
-    } else {
-      this.editBtn = 'Edit';
-      if (this.myEditor && this.myEditor.editorInstance) {
-        this.content = this.myEditor.editorInstance.getData();
-      }
+  getTitlePlaceholder(): string {
+    if (this.title.length > 0) {
+      return '';
     }
+    return 'Note Title';
   }
-  onCancel(): void {
-    this.editMode = !this.editMode;
-    if (this.editBtn === 'Edit') {
-      this.editBtn = 'Save';
-    } else {
-      this.editBtn = 'Edit';
-    }
+
+  changeNoteColor(hexCode): void {
+    this.activeColor = hexCode;
+  }
+
+  getColor(): string {
+    return this.activeColor;
+  }
+
+  onDelete(): void {
+    this.notesService.deleteNote(this.id);
+  }
+
+  onPin(): void {
+    this.pinned = !this.pinned;
+    this.notesService.pinNote(this.id);
+  }
+
+  onLock(): void {
+    this.locked = !this.locked;
   }
 }

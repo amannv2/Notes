@@ -1,16 +1,29 @@
-<div class="container">
-  <div class="row page-title">Quick Notes</div>
-  <div class="row page-header">
-    <button
-      class="pull-right add-new"
-      mat-fab
-      color="accent"
-      (click)="addNew()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  <div class="row notes-container">
-    <app-note *ngFor="let note of notes"></app-note>
-  </div>
-</div>
+<mat-sidenav-container class="example-container" fullscreen autosize>
+  <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+    <mat-nav-list>
+      <mat-list-item>
+        <div class="nav-container">
+          <button mat-icon-button (click)="opened = !opened">
+            <mat-icon *ngIf="!opened">chevron_right</mat-icon>
+            <mat-icon *ngIf="opened">chevron_left</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/notes">
+        <p matLine *ngIf="opened">Notes</p>
+        <div class="icon-container">
+          <mat-icon mat-list-icon>sticky_note_2</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/draw">
+        <p matLine *ngIf="opened">Draw</p>
+        <div class="icon-container">
+          <mat-icon mat-list-icon>gesture</mat-icon>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
