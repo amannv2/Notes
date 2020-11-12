@@ -18,7 +18,7 @@ import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { QuillModule } from 'ngx-quill';
 import { AppComponent } from './app.component';
 import { DrawComponent } from './draw/draw.component';
-import { NoteComponent } from './note/note.component';
+import { NoteComponent } from './all-notes/note/note.component';
 import { NotesService } from './notes.service';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 

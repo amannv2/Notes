@@ -1,7 +1,7 @@
 <mat-card class="note-card" [ngStyle]="{ backgroundColor: getColor() }">
   <mat-card-header>
     <mat-card-title>
-      <mat-form-field>
+      <mat-form-field style="width: 100%">
         <input
           class="note-title"
           matInput
@@ -9,6 +9,7 @@
           [(ngModel)]="title"
           [placeholder]="getTitlePlaceholder()"
           [disabled]="locked"
+          (input)="changeTitle($event.target.value)"
         />
       </mat-form-field>
     </mat-card-title>
@@ -20,7 +21,7 @@
       (click)="onDelete()"
       aria-label="Delete Note"
     >
-      <mat-icon>close</mat-icon>
+      <mat-icon class="close-btn">close</mat-icon>
     </button>
   </mat-card-header>
   <mat-card-content class="note-content-container">
@@ -34,6 +35,8 @@
         placeholder="Type here..."
         [styles]="{ height: '200px' }"
         [disabled]="locked"
+        (onEditorChanged)="changedEditor($event)"
+        (onBlur)="blur($event)"
       ></quill-editor>
     </div>
   </mat-card-content>

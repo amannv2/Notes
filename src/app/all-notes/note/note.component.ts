@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Injectable, OnInit } from '@angular/core';
-import { NotesService } from '../notes.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import * as Quill from 'quill';
+import { NotesService } from '../../notes.service';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
@@ -20,46 +21,53 @@ import * as Quill from 'quill';
   ],
 })
 export class NoteComponent implements OnInit {
-  id = 0;
-  title = '';
-  content = '';
-  locked = false;
-  pinned = false;
+  @Input() id: number;
+  @Input() title: string;
+  @Input() content: string;
+  @Input() locked: boolean;
+  @Input() pinned: boolean;
+  @Input() activeColor: string;
   editor: Quill;
   modules = {};
-  activeColor = '#0e9aa7';
   showColors = false;
   titlePlaceholder = 'Note Title';
+  temp: string;
 
   // blured = false;
   // focused = false;
   //
   // (onEditorChanged)="changedEditor($event)"
-  // changedEditor(event: EditorChangeContent | EditorChangeSelection): void {
-  // tslint:disable-next-line:no-console
-  // console.log('editor-change', event);
-  // }
+  changedEditor(event: EditorChangeContent | EditorChangeSelection): void {
+    if (event.event === 'text-change') {
+      this.temp = event.html;
+    }
+  }
+
+  changeTitle(title: string): void {
+    this.notesService.setTitle(this.id, title);
+  }
   //
   // created(event) {
   //   // tslint:disable-next-line:no-console
   //   console.log('editor-created', event);
   // }
   // focus($event) {
-  //   // tslint:disable-next-line:no-console
-  //   console.log('focus', $event);
-  //   this.focused = true;
-  //   this.blured = false;
+  // tslint:disable-next-line:no-console
+  // console.log('focus', $event);
+  // this.focused = true;
+  // this.blured = false;
   // }
   //
-  // blur($event) {
-  //   // tslint:disable-next-line:no-console
-  //   console.log('blur', $event);
-  //   this.focused = false;
-  //   this.blured = true;
-  // }
+  blur($event: any): void {
+    // tslint:disable-next-line:no-console
+    // console.log('blur', this.temp);
+    this.notesService.setContent(this.id, this.temp);
+    // this.focused = false;
+    // this.blured = true;
+  }
 
   constructor(private notesService: NotesService) {
-    this.id = this.notesService.getCounter();
+    // this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -83,7 +91,13 @@ export class NoteComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.content = this.notesService.getContent(this.id);
+    this.title = this.notesService.getTitle(this.id);
+    this.activeColor = this.notesService.getColor(this.id);
+    this.pinned = this.notesService.getPinnedStatus(this.id);
+    this.locked = this.notesService.getLockStatus(this.id);
+  }
 
   getTitlePlaceholder(): string {
     if (this.title.length > 0) {
@@ -92,8 +106,9 @@ export class NoteComponent implements OnInit {
     return 'Note Title';
   }
 
-  changeNoteColor(hexCode): void {
-    this.activeColor = hexCode;
+  changeNoteColor(hexCode: string): void {
+    // this.activeColor = hexCode;
+    this.notesService.setColor(this.id, hexCode);
   }
 
   getColor(): string {
@@ -106,10 +121,11 @@ export class NoteComponent implements OnInit {
 
   onPin(): void {
     this.pinned = !this.pinned;
-    this.notesService.pinNote(this.id);
+    this.notesService.pinNote(this.id, this.pinned);
   }
 
   onLock(): void {
     this.locked = !this.locked;
+    this.notesService.setLock(this.id, this.locked);
   }
 }

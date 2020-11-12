@@ -8,7 +8,7 @@
 }
 
 .note-title {
-  width: 90%;
+  width: 100%;
 }
 
 .note-content {
@@ -21,6 +21,14 @@
   margin-top: -20px;
 }
 
+.close-btn {
+  opacity: 0.5;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
 .footer {
   padding-right: 15px;
 }
@@ -31,7 +39,7 @@
   box-shadow: none;
 }
 
-.top-right{
+.top-right {
   margin-left: auto;
 }
 

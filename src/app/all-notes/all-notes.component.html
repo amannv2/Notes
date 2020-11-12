@@ -5,6 +5,15 @@
     <mat-icon>add</mat-icon>
   </button>
   <div class="row notes-container">
-    <app-note *ngFor="let note of notes" @fadeIn></app-note>
+    <div *ngFor="let note of notes" @fadeIn>
+      <app-note
+        [id]="note.id"
+        [title]="note.title"
+        [content]="note.content"
+        [activeColor]="note.color"
+        [locked]="note.locked"
+        [pinned]="note.pinned"
+      ></app-note>
+    </div>
   </div>
 </div>
