@@ -3,14 +3,12 @@
   height: 100%;
 }
 
-.sidebar {
-  width: 10%;
+::ng-deep .mat-tooltip {
+  font-size: 90%;
 }
 
-.example-container {
-  /* width: 500px; */
-  /* height: 300px; */
-  border: 1px solid rgba(0, 0, 0, 0.5);
+.sidebar {
+  width: 10%;
 }
 
 .example-sidenav-content {
@@ -30,6 +28,10 @@
   width: 100%;
 }
 
+mat-sidenav-content {
+  background-color: #e8e8e8;
+}
+
 .add-new {
   position: fixed;
   width: 60px;
@@ -42,10 +44,6 @@
   text-align: center;
   box-shadow: 2px 2px 3px #999;
   z-index: 10;
-}
-
-.notes-container {
-  /* overflow: hidden; */
 }
 
 .page-title {

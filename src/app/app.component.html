@@ -1,9 +1,19 @@
-<mat-sidenav-container class="example-container" fullscreen autosize>
+<mat-sidenav-container
+  id="sidenav"
+  class="example-container"
+  fullscreen
+  autosize
+>
   <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
     <mat-nav-list>
       <mat-list-item>
         <div class="nav-container">
-          <button mat-icon-button (click)="opened = !opened">
+          <button
+            mat-icon-button
+            (click)="opened = !opened"
+            matTooltip="Open Sidebar"
+            matTooltipShowDelay="1000"
+          >
             <mat-icon *ngIf="!opened">chevron_right</mat-icon>
             <mat-icon *ngIf="opened">chevron_left</mat-icon>
           </button>
@@ -11,13 +21,21 @@
       </mat-list-item>
       <mat-list-item routerLink="/notes">
         <p matLine *ngIf="opened">Notes</p>
-        <div class="icon-container">
+        <div
+          class="icon-container"
+          matTooltip="Notes"
+          matTooltipShowDelay="1000"
+        >
           <mat-icon mat-list-icon>sticky_note_2</mat-icon>
         </div>
       </mat-list-item>
       <mat-list-item routerLink="/draw">
         <p matLine *ngIf="opened">Draw</p>
-        <div class="icon-container">
+        <div
+          class="icon-container"
+          matTooltip="Draw"
+          matTooltipShowDelay="1000"
+        >
           <mat-icon mat-list-icon>gesture</mat-icon>
         </div>
       </mat-list-item>

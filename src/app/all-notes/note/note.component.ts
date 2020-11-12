@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import * as Quill from 'quill';
 import { NotesService } from '../../notes.service';
+
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
@@ -70,23 +71,20 @@ export class NoteComponent implements OnInit {
     // this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
-        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-        ['blockquote', 'code-block'],
-
-        [{ header: 1 }, { header: 2 }], // custom button values
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        [{ direction: 'rtl' }], // text direction
-
-        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
         [{ font: [] }],
-        [{ align: [] }],
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        // ['strike'], // toggled buttons
 
-        ['clean'], // remove formatting button
+        [{ align: [] }],
+        [{ list: 'ordered' }],
+        ['blockquote', 'code-block'],
+        // [{ direction: 'rtl' }], // text direction
 
         ['link', 'image'], // link and image
+        [{ color: [] }], // dropdown with defaults from theme
+
+        // ['clean'], // remove formatting button
       ],
     };
   }

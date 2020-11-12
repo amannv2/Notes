@@ -35,7 +35,6 @@ export class NotesService {
 
   deleteNote(targetId: any): void {
     this.notes = this.notes.filter(({ id }) => id !== targetId);
-    console.log(this.notes);
   }
 
   pinNote(targetId: any, status: boolean): void {

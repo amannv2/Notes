@@ -8,6 +8,7 @@ import {
   MatListModule,
   MatSidenavModule,
   MatTabsModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatCheckboxModule,
     MatListModule,
+    MatTooltipModule,
     QuillModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],

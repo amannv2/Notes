@@ -3,6 +3,7 @@
     <mat-card-title>
       <mat-form-field style="width: 100%">
         <input
+          [matTooltip]="title"
           class="note-title"
           matInput
           type="text"
@@ -16,6 +17,7 @@
 
     <button
       mat-mini-fab
+      matTooltip="Delete Note"
       color="accent"
       class="pull-right lock-btn top-right"
       (click)="onDelete()"
@@ -43,6 +45,7 @@
   <mat-card-footer class="footer">
     <button
       mat-fab
+      matTooltip="Change note color"
       class="grad-colors"
       (click)="showColors = !showColors"
     ></button>
@@ -73,10 +76,16 @@
         class="note-colors cfe8a71"
         (click)="changeNoteColor('#fe8a71')"
       ></button>
+      <button
+        mat-fab
+        class="note-colors cec524b"
+        (click)="changeNoteColor('#ec524b')"
+      ></button>
     </div>
 
     <button
       mat-mini-fab
+      matTooltip="Pin note at the top"
       color="accent"
       class="pull-right lock-btn"
       aria-label="Pin Note"
@@ -91,6 +100,7 @@
     </button>
     <button
       mat-mini-fab
+      matTooltip="Disable editing"
       color="accent"
       class="pull-right lock-btn"
       (click)="onLock()"
