@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row page-title">Quick Notes</div>
+  <br />
+  <button class="pull-right add-new" mat-fab color="accent" (click)="addNew()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="row notes-container">
+    <div *ngFor="let note of notes" @fadeIn>
+      <app-note
+        [id]="note.id"
+        [title]="note.title"
+        [content]="note.content"
+        [activeColor]="note.color"
+        [locked]="note.locked"
+        [pinned]="note.pinned"
+      ></app-note>
+    </div>
+  </div>
+</div>

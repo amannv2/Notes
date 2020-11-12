@@ -5,6 +5,12 @@
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
 {
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "es2015",
+    // other options
+    "experimentalDecorators": true
+  },
   "files": [],
   "references": [
     {
@@ -16,5 +22,5 @@
     {
       "path": "./e2e/tsconfig.json"
     }
-]
+  ]
 }
