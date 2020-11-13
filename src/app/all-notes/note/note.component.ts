@@ -16,7 +16,7 @@ import { NotesService } from '../../notes.service';
       ]),
       transition(':leave', [
         style({ height: 0, opacity: 1 }),
-        animate('0.5s ease-in', style({ height: 0, opacity: 0 })),
+        animate('0.3s ease-in', style({ height: 0, opacity: 0 })),
       ]),
     ]),
   ],

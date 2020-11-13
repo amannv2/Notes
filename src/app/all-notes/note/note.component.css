@@ -34,7 +34,7 @@
 }
 
 .close-btn {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .close-btn:hover {
@@ -49,6 +49,11 @@
   margin-left: 10px;
   background-color: transparent;
   box-shadow: none;
+  opacity: 0.5;
+}
+
+.lock-btn:hover {
+  opacity: 1;
 }
 
 .top-right {

@@ -11,6 +11,7 @@
           [placeholder]="getTitlePlaceholder()"
           [disabled]="locked"
           (input)="changeTitle($event.target.value)"
+          autocomplete="off"
         />
       </mat-form-field>
     </mat-card-title>
