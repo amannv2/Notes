@@ -1,8 +1,7 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { NoteComponent } from './note/note.component';
-import { Note } from './note/note.model';
 import { NotesService } from '../notes.service';
+import { Note } from './note/note.model';
 
 @Component({
   selector: 'app-all-notes',
@@ -18,9 +17,7 @@ import { NotesService } from '../notes.service';
   ],
 })
 export class AllNotesComponent implements OnInit {
-  title = 'Notes';
   notes: Note[] = [];
-  opened = false;
 
   constructor(private notesService: NotesService) {
     this.notes = this.notesService.getNotes();
@@ -34,9 +31,5 @@ export class AllNotesComponent implements OnInit {
 
   addNew(): void {
     this.notesService.addNew();
-  }
-
-  showSideBar(): void {
-    this.opened = !this.opened;
   }
 }

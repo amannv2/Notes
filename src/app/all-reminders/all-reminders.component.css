@@ -3,6 +3,16 @@
   height: 100%;
 }
 
+.page-title {
+  height: 12%;
+  padding: 10px;
+  color: #495464;
+  font-family: "Comfortaa", cursive;
+  font-size: 50px;
+  display: grid;
+  place-items: center;
+}
+
 .add-new {
   position: fixed;
   width: 60px;
@@ -32,22 +42,4 @@ mat-icon:hover {
   100% {
     transform: rotateZ(180deg);
   }
-}
-
-.page-title {
-  height: 12%;
-  padding: 10px;
-  color: #495464;
-  font-family: "Comfortaa", cursive;
-  font-size: 50px;
-  display: grid;
-  place-items: center;
-}
-
-.notes-container {
-  margin-top: -2%;
-}
-
-.page-header {
-  padding: 5px;
 }

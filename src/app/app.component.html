@@ -1,10 +1,10 @@
 <mat-sidenav-container
   id="sidenav"
-  class="example-container"
+  class="sidenav-container"
   fullscreen
   autosize
 >
-  <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+  <mat-sidenav #sidenav class="page-sidenav" mode="side" opened="true">
     <mat-nav-list>
       <mat-list-item>
         <div class="nav-container">
@@ -37,6 +37,16 @@
           matTooltipShowDelay="1000"
         >
           <mat-icon mat-list-icon>gesture</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/reminders">
+        <p matLine *ngIf="opened">Reminders</p>
+        <div
+          class="icon-container"
+          matTooltip="Reminders"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>notifications</mat-icon>
         </div>
       </mat-list-item>
     </mat-nav-list>

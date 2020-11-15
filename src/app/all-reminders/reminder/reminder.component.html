@@ -1,0 +1,89 @@
+<mat-card class="reminder-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-form-field class="reminder-title">
+        <input
+          [matTooltip]="content"
+          class="reminder-title"
+          matInput
+          type="text"
+          [(ngModel)]="content"
+          placeholder="Remind me to.."
+        />
+      </mat-form-field>
+    </mat-card-title>
+    <button
+      mat-mini-fab
+      matTooltip="Save Reminder"
+      color="accent"
+      class="pull-right lock-btn top-right"
+      aria-label="Save Reminder"
+      tabindex="9"
+      (click)="notify()"
+    >
+      <mat-icon class="close-btn">save</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-footer class="footer">
+    <button
+      [ngClass]="pm ? 'am-pm-active' : 'am'"
+      class="pm pull-right"
+      tabindex="6"
+      (click)="setAmPm()"
+      mat-icon-button
+    >
+      PM
+    </button>
+    <button
+      [ngClass]="am ? 'am-pm-active' : 'am'"
+      class="am pull-right"
+      tabindex="5"
+      (click)="setAmPm()"
+      mat-icon-button
+    >
+      AM
+    </button>
+
+    <mat-form-field class="reminder-min pull-right">
+      <mat-label>Minute</mat-label>
+      <select matNativeControl required tabindex="2"
+      [(ngModel)]="remMin"
+      >
+        <option
+          *ngFor="let min of mins"
+          (value)="(min)"
+          ngDefaultControl
+        >
+          {{ min }}
+        </option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="reminder-hour pull-right">
+      <mat-label>Hour</mat-label>
+      <select matNativeControl required tabindex="3"
+      [(ngModel)]="remHour"
+      >
+        <option
+          *ngFor="let hour of hours"
+          (value)="(hour)"
+          ngDefaultControl
+        >
+          {{ hour }}
+        </option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="reminder-input pull-right">
+      <mat-label>Remind me on</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        (click)="picker.open()"
+        tabindex="4"
+      />
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-card-footer>
+</mat-card>

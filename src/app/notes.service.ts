@@ -37,14 +37,58 @@ export class NotesService {
     this.notes = this.notes.filter(({ id }) => id !== targetId);
   }
 
+  array_move(arr, oldIndex, newIndex): void {
+    if (newIndex >= arr.length) {
+      let k = newIndex - arr.length + 1;
+      while (k--) {
+        arr.push(undefined);
+      }
+    }
+    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+  }
+
   pinNote(targetId: any, status: boolean): void {
     this.setPin(targetId, status);
-    this.notes.forEach((note, i): void => {
-      if (note.id === targetId) {
-        this.notes.splice(i, 1);
-        this.notes.unshift(note);
+
+    if (!status) {
+      let from: number;
+      let to: number;
+
+      for (let index = 0; index < this.notes.length; index++) {
+        if (this.notes[index].id === targetId) {
+          from = index;
+          break;
+        }
       }
-    });
+
+      if (from === this.notes.length - 1) {
+        to = this.notes.length - 1;
+      } else {
+        for (let index = from + 1; index < this.notes.length; index++) {
+          if (this.notes[index].pinned === false) {
+            to = index;
+            console.log(index);
+
+            if (index > 0) {
+              to--;
+            }
+            break;
+          } else {
+            to = this.notes.length - 1;
+          }
+        }
+      }
+
+      this.array_move(this.notes, from, to);
+      console.log(from, to);
+    } else {
+      this.notes.forEach((note, i): void => {
+        if (note.id === targetId) {
+          this.notes.splice(i, 1);
+          this.notes.unshift(note);
+        }
+      });
+    }
   }
 
   setTitle(targetId: number, title: string): void {

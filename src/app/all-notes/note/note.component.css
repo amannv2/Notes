@@ -5,14 +5,11 @@
   border-radius: 15px;
   float: left;
   background-color: #0e9aa7;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .note-card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.note-card {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 ::ng-deep .mat-tooltip {
@@ -33,22 +30,20 @@
   margin-top: -20px;
 }
 
-.close-btn {
-  opacity: 0.5;
-}
-
-.close-btn:hover {
-  opacity: 1;
-}
-
 .footer {
   padding-right: 15px;
 }
 
 .lock-btn {
   margin-left: 10px;
+  opacity: 0.5;
   background-color: transparent;
   box-shadow: none;
+}
+
+.lock-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.171);
 }
 
 .top-right {

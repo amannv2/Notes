@@ -33,6 +33,8 @@ export class NoteComponent implements OnInit {
   showColors = false;
   titlePlaceholder = 'Note Title';
   temp: string;
+  pinTooltip = 'Pin note at the top';
+  lockTooltip = 'Disable editing';
 
   // blured = false;
   // focused = false;
@@ -95,6 +97,7 @@ export class NoteComponent implements OnInit {
     this.activeColor = this.notesService.getColor(this.id);
     this.pinned = this.notesService.getPinnedStatus(this.id);
     this.locked = this.notesService.getLockStatus(this.id);
+    this.getToolTips();
   }
 
   getTitlePlaceholder(): string {
@@ -120,10 +123,25 @@ export class NoteComponent implements OnInit {
   onPin(): void {
     this.pinned = !this.pinned;
     this.notesService.pinNote(this.id, this.pinned);
+    this.getToolTips();
   }
 
   onLock(): void {
     this.locked = !this.locked;
     this.notesService.setLock(this.id, this.locked);
+    this.getToolTips();
+  }
+
+  getToolTips(): void {
+    if (this.locked) {
+      this.lockTooltip = 'Enable editing';
+    } else {
+      this.lockTooltip = 'Disable editing';
+    }
+    if (this.pinned) {
+      this.pinTooltip = 'Unpin note';
+    } else {
+      this.pinTooltip = 'Pin note at the top';
+    }
   }
 }

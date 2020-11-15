@@ -11,15 +11,13 @@
   width: 10%;
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
 .icon-container {
   margin: 0 5px;
+}
+
+.page-sidenav {
+  box-shadow: 10px 14px 28px rgba(0, 0, 0, 0.356),
+    0 10px 10px rgba(0, 0, 0, 0.336);
 }
 
 .nav-container {

@@ -85,7 +85,7 @@
 
     <button
       mat-mini-fab
-      matTooltip="Pin note at the top"
+      [matTooltip]="[pinTooltip]"
       color="accent"
       class="pull-right lock-btn"
       aria-label="Pin Note"
@@ -100,7 +100,7 @@
     </button>
     <button
       mat-mini-fab
-      matTooltip="Disable editing"
+      [matTooltip]="lockTooltip"
       color="accent"
       class="pull-right lock-btn"
       (click)="onLock()"
