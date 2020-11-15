@@ -39,6 +39,11 @@
   opacity: 0.5;
   background-color: transparent;
   box-shadow: none;
+  opacity: 0.5;
+}
+
+.lock-btn:hover {
+  opacity: 1;
 }
 
 .lock-btn:hover {
