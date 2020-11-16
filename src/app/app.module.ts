@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatSidenavModule,
     MatTooltipModule,
+    HttpClientModule,
     MatCheckboxModule,
     MatNativeDateModule,
     MatDatepickerModule,

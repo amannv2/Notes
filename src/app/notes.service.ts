@@ -1,43 +1,57 @@
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NoteComponent } from './all-notes/note/note.component';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Note } from './all-notes/note/note.model';
+
+const baseURL = 'http://localhost:3000';
+const header = { 'content-type': 'application/json' };
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
   notes: Note[] = [];
-  counter = 0;
-  // notesObs: Observable<Note[]>;
 
-  constructor() {
-    this.addNew();
-    // this.notesObs = new Observable((observer) => {
-    //   observer.next(this.notes);
-    // });
+  constructor(private http: HttpClient) {
+    this.http.get(baseURL + '/notes').subscribe((data: Note[]) => {
+      this.notes = data;
+    });
+  }
+
+  updateNote(note: Note): Observable<{}> {
+    const id = note.id;
+
+    return this.http.patch(baseURL + '/note/' + id, JSON.stringify(note), {
+      headers: header,
+    });
   }
 
   addNew(): void {
-    this.counter++;
-    this.notes.push(new Note(this.counter, '', '', '#0e9aa7', false, false));
+    this.notes.push(new Note(0, '', '', '#0e9aa7', false, false));
+
+    const body = this.notes[this.notes.length - 1];
+    this.http
+      .post(baseURL + '/notes', body, { headers: header })
+      .subscribe((data: any) => {
+        this.notes[this.notes.length - 1].id = data._id;
+        this.updateNote(body).subscribe((res: any) => {
+          // console.log(res);
+        });
+      });
   }
 
-  getCounter(): number {
-    return this.counter;
-  }
-
-  // subToNotes(): Observable<Note[]> {
-  //   return this.notesObs;
-  // }
-
-  getNotes(): Note[] {
-    return this.notes;
+  getNotes(): Observable<{}> {
+    return this.http.get(baseURL + '/notes');
   }
 
   deleteNote(targetId: any): void {
     this.notes = this.notes.filter(({ id }) => id !== targetId);
+    this.http
+      .delete(baseURL + '/note/' + targetId, { headers: header })
+      .subscribe((data: any) => {
+        // console.log(data);
+      });
   }
 
-  array_move(arr, oldIndex, newIndex): void {
+  array_move(arr: any[], oldIndex: number, newIndex: number): void {
     if (newIndex >= arr.length) {
       let k = newIndex - arr.length + 1;
       while (k--) {
@@ -47,9 +61,115 @@ export class NotesService {
     arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
   }
 
+  setTitle(targetId: number, title: string): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.title = title;
+        this.updateNote(element).subscribe((data: any) => {
+          // console.log(data);
+        });
+      }
+    });
+  }
+
+  getTitle(targetId: number): string {
+    let title = '';
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        title = element.title;
+      }
+    });
+    return title;
+  }
+
+  setContent(targetId: number, content: string): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.content = content;
+        this.updateNote(element).subscribe((data: any) => {
+          // console.log(data);
+        });
+      }
+    });
+  }
+
+  getContent(targetId: number): string {
+    let content = '';
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        content = element.content;
+      }
+    });
+    return content;
+  }
+
+  setColor(targetId: number, color: string): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.color = color;
+        this.updateNote(element).subscribe((data: any) => {
+          // console.log(data);
+        });
+      }
+    });
+  }
+
+  getColor(targetId: number): string {
+    let color = '#0e9aa7';
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        color = element.color;
+      }
+    });
+    return color;
+  }
+
+  setLock(targetId: number, status: boolean): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.locked = status;
+        this.updateNote(element).subscribe((data: any) => {
+          // console.log(data);
+        });
+      }
+    });
+  }
+
+  getLockStatus(targetId: number): boolean {
+    let status = false;
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        status = element.locked;
+      }
+    });
+    return status;
+  }
+
+  setPin(targetId: number, status: boolean): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.pinned = status;
+        this.updateNote(element).subscribe((data: any) => {
+          // console.log(data);
+        });
+      }
+    });
+  }
+
+  getPinnedStatus(targetId: number): boolean {
+    let status = false;
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        status = element.pinned;
+      }
+    });
+    return status;
+  }
+
   pinNote(targetId: any, status: boolean): void {
     this.setPin(targetId, status);
 
+    // reshuffle array
     if (!status) {
       let from: number;
       let to: number;
@@ -80,7 +200,6 @@ export class NotesService {
       }
 
       this.array_move(this.notes, from, to);
-      console.log(from, to);
     } else {
       this.notes.forEach((note, i): void => {
         if (note.id === targetId) {
@@ -89,95 +208,5 @@ export class NotesService {
         }
       });
     }
-  }
-
-  setTitle(targetId: number, title: string): void {
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        element.title = title;
-      }
-    });
-  }
-
-  getTitle(targetId: number): string {
-    let title = '';
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        title = element.title;
-      }
-    });
-    return title;
-  }
-
-  setContent(targetId: number, content: string): void {
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        element.content = content;
-      }
-    });
-  }
-
-  getContent(targetId: number): string {
-    let content = '';
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        content = element.content;
-      }
-    });
-    return content;
-  }
-
-  setColor(targetId: number, color: string): void {
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        element.color = color;
-      }
-    });
-  }
-
-  getColor(targetId: number): string {
-    let color = '#0e9aa7';
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        color = element.color;
-      }
-    });
-    return color;
-  }
-
-  setLock(targetId: number, status: boolean): void {
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        element.locked = status;
-      }
-    });
-  }
-
-  getLockStatus(targetId: number): boolean {
-    let status = false;
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        status = element.locked;
-      }
-    });
-    return status;
-  }
-
-  setPin(targetId: number, status: boolean): void {
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        element.pinned = status;
-      }
-    });
-  }
-
-  getPinnedStatus(targetId: number): boolean {
-    let status = false;
-    this.notes.forEach((element) => {
-      if (element.id === targetId) {
-        status = element.pinned;
-      }
-    });
-    return status;
   }
 }
