@@ -7,20 +7,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatCardModule,
-  MatIconModule,
-  MatListModule,
-  MatTabsModule,
-  MatSelectModule,
-  MatTooltipModule,
-  MatSidenavModule,
-  MatCheckboxModule,
-  MatNativeDateModule,
-  MatDatepickerModule,
-  MatButtonToggleModule,
-} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+// import { MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 import { QuillModule } from 'ngx-quill';
+import { environment } from '../environments/environment';
 import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 
 import { NotesService } from './notes.service';
@@ -34,7 +36,6 @@ import { AllNotesComponent } from './all-notes/all-notes.component';
 import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'notes', pathMatch: 'full' },
@@ -66,15 +67,17 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTooltipModule,
     HttpClientModule,
+    MatSnackBarModule,
     MatCheckboxModule,
-    MatNativeDateModule,
     MatDatepickerModule,
     MatButtonToggleModule,
     CanvasWhiteboardModule,
     BrowserAnimationsModule,
     QuillModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     NotesService,
