@@ -33,6 +33,8 @@ import { NoteComponent } from './all-notes/note/note.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'notes', pathMatch: 'full' },
@@ -72,6 +74,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     QuillModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     NotesService,
