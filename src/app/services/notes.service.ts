@@ -1,17 +1,25 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Note } from '../all-notes/note/note.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
   notes: Note[] = [];
+  readonly owner = this.cookieService.get('uname');
 
-  constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
-    this.httpService.sendGetRequest('/notes').subscribe((data: Note[]) => {
-      this.notes = data;
-    });
+  constructor(
+    private httpService: HttpService,
+    private snackBar: MatSnackBar,
+    private cookieService: CookieService
+  ) {
+    this.httpService
+      .sendGetRequest('/notes/' + this.owner)
+      .subscribe((data: Note[]) => {
+        this.notes = data;
+      });
   }
 
   generateSnack(message: string, action: string): void {
@@ -30,7 +38,7 @@ export class NotesService {
   }
 
   addNew(): void {
-    this.notes.push(new Note(0, '', '', '#0e9aa7', false, false));
+    this.notes.push(new Note(0, '', '', '#0e9aa7', false, false, this.owner));
 
     const body = this.notes[this.notes.length - 1];
     this.httpService
@@ -44,7 +52,7 @@ export class NotesService {
   }
 
   getNotes(): Observable<{}> {
-    return this.httpService.sendGetRequest('/notes');
+    return this.httpService.sendGetRequest('/notes/' + this.owner);
   }
 
   deleteNote(targetId: any): void {

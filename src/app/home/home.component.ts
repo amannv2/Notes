@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   showNext = false;
   nextText = 'Next';
   newUser: boolean;
+  loggingIn = false;
 
   constructor(
     private dialogService: ConfirmDialogService,
@@ -136,21 +137,24 @@ export class HomeComponent implements OnInit {
     this.httpService
       .sendPostRequest('/users', JSON.stringify(body))
       .subscribe((res: any) => {
-        if (res.username === this.username) {
-          this.authService.setCookies(this.username, this.password);
-          this.router.navigate(['/', 'notes']);
-        }
+        this.authService.setCookies(this.username, this.password);
+        this.router.navigate(['/', 'notes']);
       });
   }
 
   validatePassword(): void {
-    const pass = { pass: this.password };
+    this.loggingIn = true;
+    this.password = this.authService.hashIt(this.password);
+    const body = {
+      user: this.username,
+      pass: this.password,
+    };
 
     if (this.newUser) {
       this.addNewUser();
     } else {
       this.httpService
-        .sendPostRequest('/user/' + this.username, JSON.stringify(pass))
+        .sendPostRequest('/user/' + this.username, JSON.stringify(body))
         .subscribe((res: { status: boolean }) => {
           if (res.status) {
             this.authService.setCookies(this.username, this.password);

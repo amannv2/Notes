@@ -12,6 +12,22 @@ export class AuthServiceService {
     this.cookieService.set('pass', password, { expires: 30 });
   }
 
+  hashIt(pass: string): string {
+    let hash = 0;
+    let char: number;
+    if (pass.length === 0) {
+      return hash.toString();
+    }
+    for (let i = 0; i < pass.length; i++) {
+      char = pass.charCodeAt(i);
+      // tslint:disable-next-line: no-bitwise
+      hash = (hash << 5) - hash + char;
+      // tslint:disable-next-line: no-bitwise
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash.toString();
+  }
+
   isLoggedIn(): boolean {
     if (
       this.cookieService.get('uname').length > 0 &&

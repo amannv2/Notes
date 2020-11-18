@@ -5,6 +5,7 @@ export class Note {
   color: string;
   locked: boolean;
   pinned: boolean;
+  owner: string;
 
   constructor(
     id: number,
@@ -12,7 +13,8 @@ export class Note {
     content: string,
     color: string,
     locked: boolean,
-    pinned: boolean
+    pinned: boolean,
+    owner: string
   ) {
     this.id = id;
     this.title = title;
@@ -20,5 +22,6 @@ export class Note {
     this.color = color;
     this.pinned = pinned;
     this.locked = locked;
+    this.owner = owner;
   }
 }
