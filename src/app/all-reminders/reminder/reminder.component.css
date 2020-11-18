@@ -26,6 +26,7 @@
 
 .pm {
   margin-top: 5px;
+  margin-right: 10px;
 }
 
 .am-pm-active {
@@ -34,7 +35,7 @@
 }
 
 .reminder-input {
-  width: 20% !important;
+  width: 23% !important;
   margin-right: 5px;
   margin-left: 5px;
 }
@@ -43,10 +44,22 @@
   width: 15% !important;
   margin-right: 5px;
   margin-left: 5px;
+  float: right;
 }
 
 .reminder-min {
-  width: 14% !important;
+  width: 17% !important;
   margin-right: 5px;
   margin-left: 5px;
+  float: right;
+}
+
+.save-btn {
+  background-color: transparent;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.save-btn:hover {
+  opacity: 1;
 }

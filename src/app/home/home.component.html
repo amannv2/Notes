@@ -1,0 +1,138 @@
+<div class="bg">
+  <mat-card
+    class="note-card transformable"
+    [ngStyle]="{ backgroundColor: getColor() }"
+    id="grow"
+  >
+    <mat-card-header>
+      <mat-card-title>
+        <mat-form-field class="note-title">
+          <input
+            class="note-title"
+            matInput
+            type="text"
+            placeholder="Welcome to Quick Notes"
+            disabled
+          />
+        </mat-form-field>
+      </mat-card-title>
+
+      <button
+        mat-mini-fab
+        color="accent"
+        class="pull-right lock-btn top-right"
+        (click)="onDelete()"
+        aria-label="Delete Note"
+      >
+        <mat-icon class="close-btn">close</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content class="note-content-container">
+      <br />
+      <br />
+      <!-- Login -->
+      <div class="login">
+        <mat-form-field appearance="outline" class="inputs" *ngIf="!showPass">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Username"
+            (input)="getUsername($event.target.value)"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <button
+          mat-button
+          *ngIf="showPass && !newUser"
+          class="back"
+          (click)="reset()"
+        >
+          <span>Not {{ username }}?</span>
+        </button>
+
+        <mat-form-field appearance="outline" class="inputs" *ngIf="showPass">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            (input)="getPassword($event.target.value)"
+            placeholder="Password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-button class="button" *ngIf="showNext" (click)="next()">
+          <span>{{ nextText }} </span>
+        </button>
+      </div>
+    </mat-card-content>
+    <mat-card-footer class="footer">
+      <button
+        mat-fab
+        class="grad-colors"
+        (click)="showColors = !showColors"
+      ></button>
+
+      <div *ngIf="showColors" [@inOutAnimation]>
+        <button
+          mat-fab
+          class="note-colors c4a4e4d"
+          (click)="changeNoteColor('#4a4e4d')"
+        ></button>
+        <button
+          mat-fab
+          class="note-colors c0e9aa7"
+          (click)="changeNoteColor('#0e9aa7')"
+        ></button>
+        <button
+          mat-fab
+          class="note-colors c3da4ab"
+          (click)="changeNoteColor('#3da4ab')"
+        ></button>
+        <button
+          mat-fab
+          class="note-colors cf6cd61"
+          (click)="changeNoteColor('#f6cd61')"
+        ></button>
+        <button
+          mat-fab
+          class="note-colors cfe8a71"
+          (click)="changeNoteColor('#fe8a71')"
+        ></button>
+        <button
+          mat-fab
+          class="note-colors cec524b"
+          (click)="changeNoteColor('#ec524b')"
+        ></button>
+      </div>
+
+      <button
+        mat-mini-fab
+        color="accent"
+        class="pull-right lock-btn"
+        aria-label="Pin Note"
+        (click)="onPin()"
+      >
+        <mat-icon>push_pin</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        color="accent"
+        class="pull-right lock-btn"
+        (click)="onLock()"
+        aria-label="Lock Note"
+      >
+        <mat-icon>lock</mat-icon>
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -1,7 +1,7 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { NotesService } from '../notes.service';
 import { Note } from './note/note.model';
+import { Component, OnInit } from '@angular/core';
+import { NotesService } from '../services/notes.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-all-notes',

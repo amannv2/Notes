@@ -7,17 +7,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
 
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { MatNativeDateModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
@@ -25,23 +28,38 @@ import { QuillModule } from 'ngx-quill';
 import { environment } from '../environments/environment';
 import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 
-import { NotesService } from './notes.service';
-import { RemindersService } from './reminders.service';
-import { PushNotificationsService } from './notification.service';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from './services/http.service';
+import { NotesService } from './services/notes.service';
+import { RemindersService } from './services/reminders.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthServiceService } from './services/auth-service.service';
+import { ConfirmDialogService } from './services/confirmDialog.service';
+import { PushNotificationsService } from './services/notification.service';
 
 import { AppComponent } from './app.component';
 import { DrawComponent } from './draw/draw.component';
+import { HomeComponent } from './home/home.component';
 import { NoteComponent } from './all-notes/note/note.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
 import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'notes', pathMatch: 'full' },
-  { path: 'notes', component: AllNotesComponent },
-  { path: 'draw', component: DrawComponent },
-  { path: 'reminders', component: AllRemindersComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'notes',
+    canActivate: [AuthGuardService],
+    component: AllNotesComponent,
+  },
+  { path: 'draw', canActivate: [AuthGuardService], component: DrawComponent },
+  {
+    path: 'reminders',
+    canActivate: [AuthGuardService],
+    component: AllRemindersComponent,
+  },
   { path: '**', redirectTo: 'not-found' },
 ];
 
@@ -50,8 +68,10 @@ const appRoutes: Routes = [
     AppComponent,
     NoteComponent,
     DrawComponent,
+    HomeComponent,
     AllNotesComponent,
     ReminderComponent,
+    DialogBoxComponent,
     AllRemindersComponent,
   ],
   imports: [
@@ -62,13 +82,16 @@ const appRoutes: Routes = [
     MatIconModule,
     MatTabsModule,
     MatInputModule,
+    MatDialogModule,
     MatSelectModule,
     MatButtonModule,
+    MatDividerModule,
     MatSidenavModule,
     MatTooltipModule,
     HttpClientModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatNativeDateModule,
     MatDatepickerModule,
     MatButtonToggleModule,
     CanvasWhiteboardModule,
@@ -79,9 +102,15 @@ const appRoutes: Routes = [
       enabled: environment.production,
     }),
   ],
+  entryComponents: [DialogBoxComponent],
   providers: [
+    HttpService,
     NotesService,
+    CookieService,
     RemindersService,
+    AuthGuardService,
+    AuthServiceService,
+    ConfirmDialogService,
     PushNotificationsService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],

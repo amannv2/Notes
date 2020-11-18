@@ -1,7 +1,7 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { RemindersService } from '../reminders.service';
 import { Reminder } from './reminder/reminder.model';
+import { RemindersService } from '../services/reminders.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-all-reminders',

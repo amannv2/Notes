@@ -12,14 +12,18 @@
         />
       </mat-form-field>
     </mat-card-title>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <button
       mat-mini-fab
       matTooltip="Save Reminder"
       color="accent"
-      class="pull-right lock-btn top-right"
+      class="pull-right save-btn top-right"
       aria-label="Save Reminder"
       tabindex="9"
-      (click)="notify()"
     >
       <mat-icon class="close-btn">save</mat-icon>
     </button>
@@ -45,37 +49,25 @@
       AM
     </button>
 
-    <mat-form-field class="reminder-min pull-right">
+    <mat-form-field appearance="fill" class="reminder-min">
       <mat-label>Minute</mat-label>
-      <select matNativeControl required tabindex="2"
-      [(ngModel)]="remMin"
-      >
-        <option
-          *ngFor="let min of mins"
-          (value)="(min)"
-          ngDefaultControl
-        >
-          {{ min }}
-        </option>
-      </select>
+      <mat-select>
+        <mat-option *ngFor="let min of mins" [value]="min.value">
+          {{ min.value }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="reminder-hour pull-right">
+    <mat-form-field appearance="fill" class="reminder-hour">
       <mat-label>Hour</mat-label>
-      <select matNativeControl required tabindex="3"
-      [(ngModel)]="remHour"
-      >
-        <option
-          *ngFor="let hour of hours"
-          (value)="(hour)"
-          ngDefaultControl
-        >
-          {{ hour }}
-        </option>
-      </select>
+      <mat-select>
+        <mat-option *ngFor="let hour of hours" [value]="hour.value">
+          {{ hour.value }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="reminder-input pull-right">
+    <mat-form-field class="reminder-input pull-right" appearance="fill">
       <mat-label>Remind me on</mat-label>
       <input
         matInput

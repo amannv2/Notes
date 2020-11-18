@@ -40,9 +40,9 @@
       "name": "notes",
       "urls": ["http://localhost:3000/notes"],
       "cacheConfig": {
-        "maxSize": 5,
-        "maxAge": "1d",
-        "timeout": "60s",
+        "maxSize": 10,
+        "maxAge": "2d",
+        "timeout": "30s",
         "strategy": "freshness"
       }
     }

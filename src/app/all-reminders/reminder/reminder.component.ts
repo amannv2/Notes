@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+interface Hour {
+  value: number;
+}
+interface Minute {
+  value: number;
+}
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
@@ -13,33 +18,15 @@ export class ReminderComponent implements OnInit {
   remMin: string;
   am = true;
   pm = false;
-  hours = [];
-  mins = [];
-
-  // constructor(private pushNotifications: PushNotificationsService) {
-  //   this.pushNotifications.requestPermission();
-  // }
-
-  notify(): void {
-    // our function to be called on click
-    const options = {
-      // set options
-      body: 'The truth is, I am Iron Man!',
-      icon: 'assets/images/bell.png', // adding an icon
-    };
-    // this.pushNotifications.create('Iron Man', options).subscribe(
-    //   // creates a notification
-    //   (res: any) => console.log(res),
-    //   (err: any) => console.log(err)
-    // );
-  }
+  hours: Hour[] = [];
+  mins: Minute[] = [];
 
   ngOnInit(): void {
     for (let index = 1; index < 60; index++) {
       if (index <= 12) {
-        this.hours.push(index);
+        this.hours.push({ value: index });
       }
-      this.mins.push(index);
+      this.mins.push({ value: index });
     }
   }
 

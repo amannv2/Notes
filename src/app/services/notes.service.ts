@@ -1,35 +1,40 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Note } from './all-notes/note/note.model';
-
-const baseURL = 'http://localhost:3000';
-const header = { 'content-type': 'application/json' };
+import { HttpService } from './http.service';
+import { Note } from '../all-notes/note/note.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
   notes: Note[] = [];
 
-  constructor(private http: HttpClient) {
-    this.http.get(baseURL + '/notes').subscribe((data: Note[]) => {
+  constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
+    this.httpService.sendGetRequest('/notes').subscribe((data: Note[]) => {
       this.notes = data;
+    });
+  }
+
+  generateSnack(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 
   updateNote(note: Note): Observable<{}> {
     const id = note.id;
 
-    return this.http.patch(baseURL + '/note/' + id, JSON.stringify(note), {
-      headers: header,
-    });
+    return this.httpService.sendPatchRequest(
+      '/note/' + id,
+      JSON.stringify(note)
+    );
   }
 
   addNew(): void {
     this.notes.push(new Note(0, '', '', '#0e9aa7', false, false));
 
     const body = this.notes[this.notes.length - 1];
-    this.http
-      .post(baseURL + '/notes', body, { headers: header })
+    this.httpService
+      .sendPostRequest('/notes', JSON.stringify(body))
       .subscribe((data: any) => {
         this.notes[this.notes.length - 1].id = data._id;
         this.updateNote(body).subscribe((res: any) => {
@@ -39,15 +44,15 @@ export class NotesService {
   }
 
   getNotes(): Observable<{}> {
-    return this.http.get(baseURL + '/notes');
+    return this.httpService.sendGetRequest('/notes');
   }
 
   deleteNote(targetId: any): void {
     this.notes = this.notes.filter(({ id }) => id !== targetId);
-    this.http
-      .delete(baseURL + '/note/' + targetId, { headers: header })
+    this.httpService
+      .sendDeleteRequest('/note/' + targetId)
       .subscribe((data: any) => {
-        // console.log(data);
+        this.generateSnack('Note Deleted!', 'OK');
       });
   }
 

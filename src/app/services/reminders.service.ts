@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Reminder } from './all-reminders/reminder/reminder.model';
+import { Reminder } from '../all-reminders/reminder/reminder.model';
 
 @Injectable({ providedIn: 'root' })
 export class RemindersService {
@@ -12,7 +12,7 @@ export class RemindersService {
 
   addNew(): void {
     this.counter++;
-    this.reminders.push(new Reminder(this.counter, 'Test', 'XXXXXX'));
+    this.reminders.push(new Reminder(this.counter, '', ''));
   }
 
   getCounter(): number {

@@ -1,8 +1,9 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import * as Quill from 'quill';
-import { NotesService } from '../../notes.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { NotesService } from '../../services/notes.service';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { ConfirmDialogService } from 'src/app/services/confirmDialog.service';
 
 @Component({
   selector: 'app-note',
@@ -69,7 +70,10 @@ export class NoteComponent implements OnInit {
     // this.blured = true;
   }
 
-  constructor(private notesService: NotesService) {
+  constructor(
+    private notesService: NotesService,
+    private dialogService: ConfirmDialogService
+  ) {
     // this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
@@ -117,7 +121,18 @@ export class NoteComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.notesService.deleteNote(this.id);
+    const options = {
+      title: 'Delete Confirmation',
+      message: 'This action is irreversible, do you want to continue?',
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+    };
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.notesService.deleteNote(this.id);
+      }
+    });
   }
 
   onPin(): void {

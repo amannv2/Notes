@@ -1,11 +1,57 @@
+.bg {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    -50deg,
+    #eede52,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #5c77f0,
+    #23d5ab
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login {
+  display: grid;
+  place-items: center;
+}
+
+.inputs {
+  width: 15vw !important;
+}
+
+.transformable {
+  -webkit-transition: height 200ms linear;
+  -moz-transition: height 200ms linear;
+  -o-transition: height 200ms linear;
+  -ms-transition: height 200ms linear;
+  transition: height 200ms linear;
+}
+
 .note-card {
-  width: 29%;
-  height: 25%;
-  margin: 2%;
+  width: 35vw;
+  height: 14.5vw;
   border-radius: 15px;
   float: left;
   background-color: #0e9aa7;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-left: 31.5vw;
+  margin-top: 15vw;
 }
 
 .note-card:hover {
@@ -17,7 +63,7 @@
 }
 
 .note-title {
-  width: 100%;
+  width: 13vw !important;
 }
 
 .note-content {
@@ -103,4 +149,48 @@
 
 .cec524b {
   background-color: #ec524b;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #2b2b2b59;
+  border: none;
+  color: #918f8f;
+  text-align: center;
+  font-size: 19px;
+  padding: 5px;
+  width: 15vw;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.back {
+  margin: -10px;
+  margin-bottom: 5px;
 }
