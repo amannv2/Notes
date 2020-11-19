@@ -8,12 +8,14 @@ export class AuthServiceService {
   constructor(private cookieService: CookieService) {}
 
   setCookies(username: string, password: string): void {
+    this.clearCookies();
     this.cookieService.set('uname', username, { expires: 30 });
     this.cookieService.set('pass', password, { expires: 30 });
   }
 
   clearCookies(): void {
-    this.cookieService.deleteAll();
+    this.cookieService.delete('uname');
+    this.cookieService.delete('pass');
   }
 
   getUsername(): string {

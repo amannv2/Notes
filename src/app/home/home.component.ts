@@ -162,8 +162,17 @@ export class HomeComponent implements OnInit {
           if (res.status) {
             this.authService.setCookies(this.username, this.password);
             this.router.navigate(['/', 'notes']);
+            location.reload();
           } else {
-            alert('no authed');
+            const options = {
+              title: 'Invalid Credentials',
+              message:
+                'The password for given username is incorrect. Please try again.',
+              cancelText: 'Cancel',
+              confirmText: 'Ok',
+              accent: 'accent',
+            };
+            this.dialogService.open(options);
           }
         });
     }

@@ -53,9 +53,9 @@
       <mat-list-item
         class="user"
         *ngIf="loggedIn()"
-        matTooltip="Hello {{ uname }}"
+        matTooltip="Hello {{ getUname() }}"
       >
-        <p matLine *ngIf="opened">Hello {{ uname }}</p>
+        <p matLine *ngIf="opened">Hello {{ getUname() }}</p>
         <div class="icon-container">
           <mat-icon mat-list-icon>face</mat-icon>
         </div>
