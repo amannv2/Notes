@@ -18,21 +18,56 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class AllNotesComponent implements OnInit {
   notes: Note[] = [];
+  firstLoad = true;
+  empty: boolean;
+  showAll = true;
 
   constructor(private notesService: NotesService) {
-    this.notesService.getNotes().subscribe((data: Note[]) => {
-      this.notes = data;
-      // console.log(this.notes);
+    // this.notesService.getNotes().subscribe((data: Note[]) => {
+    //   this.notes = data;
+    //   this.sortByPin();
+    //   // console.log(this.notes);
+    // });
+  }
+
+  sortByPin(): void {
+    this.notes.forEach((note, i): void => {
+      if (note.pinned) {
+        this.notes.splice(i, 1);
+        this.notes.unshift(note);
+      }
     });
   }
 
   ngOnInit(): void {
     setInterval(() => {
-      this.notes = this.notesService.notes;
+      if (this.showAll) {
+        this.notes = this.notesService.notes;
+      }
+
+      if (this.firstLoad) {
+        this.sortByPin();
+        this.firstLoad = false;
+      }
+      if (this.notes.length === 0) {
+        this.empty = true;
+      } else {
+        this.empty = false;
+      }
     }, 500);
   }
 
   addNew(): void {
     this.notesService.addNew();
+    this.empty = false;
+  }
+
+  showPinned(): void {
+    this.showAll = !this.showAll;
+    if (this.showAll) {
+      this.notes = this.notesService.notes;
+    } else {
+      this.notes = this.notes.filter(({ pinned }) => pinned === true);
+    }
   }
 }

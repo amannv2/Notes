@@ -7,8 +7,27 @@
   font-size: 90%;
 }
 
-.sidebar {
-  width: 10%;
+.active-list-item {
+  color: #3b3b3b !important; /* Note: You could also use a custom theme */
+  background-color: rgb(228, 228, 228) !important;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+mat-nav-list {
+  margin-right: 10px;
+}
+
+mat-list-item {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+mat-sidenav {
+  overflow: hidden;
 }
 
 .icon-container {
@@ -54,4 +73,15 @@ mat-sidenav-content {
 
 .page-header {
   padding: 5px;
+}
+
+.user {
+  position: absolute;
+  bottom: 7%;
+}
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 90% !important;
 }

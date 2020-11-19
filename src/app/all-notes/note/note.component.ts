@@ -45,6 +45,9 @@ export class NoteComponent implements OnInit {
     if (event.event === 'text-change') {
       this.temp = event.html;
     }
+    if (this.showColors) {
+      this.showColors = false;
+    }
   }
 
   changeTitle(title: string): void {
@@ -66,6 +69,9 @@ export class NoteComponent implements OnInit {
     // tslint:disable-next-line:no-console
     // console.log('blur', this.temp);
     this.notesService.setContent(this.id, this.temp);
+    if (this.showColors) {
+      this.showColors = false;
+    }
     // this.focused = false;
     // this.blured = true;
   }

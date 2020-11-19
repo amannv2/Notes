@@ -12,6 +12,7 @@
           [disabled]="locked"
           (input)="changeTitle($event.target.value)"
           autocomplete="off"
+          tabindex="0"
         />
       </mat-form-field>
     </mat-card-title>
@@ -23,6 +24,7 @@
       class="pull-right lock-btn top-right"
       (click)="onDelete()"
       aria-label="Delete Note"
+      tabindex="10"
     >
       <mat-icon class="close-btn">close</mat-icon>
     </button>
@@ -40,6 +42,7 @@
         [disabled]="locked"
         (onEditorChanged)="changedEditor($event)"
         (onBlur)="blur($event)"
+        tabindex="1"
       ></quill-editor>
     </div>
   </mat-card-content>

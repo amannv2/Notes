@@ -60,6 +60,12 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
     component: AllRemindersComponent,
   },
+  { path: 'draw', canActivate: [AuthGuardService], component: DrawComponent },
+  {
+    path: 'logout',
+    canActivate: [AuthGuardService],
+    component: HomeComponent,
+  },
   { path: '**', redirectTo: 'not-found' },
 ];
 

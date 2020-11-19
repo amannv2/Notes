@@ -12,6 +12,14 @@ export class AuthServiceService {
     this.cookieService.set('pass', password, { expires: 30 });
   }
 
+  clearCookies(): void {
+    this.cookieService.deleteAll();
+  }
+
+  getUsername(): string {
+    return this.cookieService.get('uname');
+  }
+
   hashIt(pass: string): string {
     let hash = 0;
     let char: number;
@@ -36,5 +44,9 @@ export class AuthServiceService {
       return true;
     }
     return false;
+  }
+
+  logout(): void {
+    this.clearCookies();
   }
 }

@@ -6,20 +6,17 @@
 >
   <mat-sidenav #sidenav class="page-sidenav" mode="side" opened="true">
     <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item (click)="opened = !opened">
         <div class="nav-container">
-          <button
-            mat-icon-button
-            (click)="opened = !opened"
-            matTooltip="Open Sidebar"
-            matTooltipShowDelay="1000"
-          >
+          <button mat-icon-button matTooltipShowDelay="1000">
             <mat-icon *ngIf="!opened">chevron_right</mat-icon>
             <mat-icon *ngIf="opened">chevron_left</mat-icon>
           </button>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/notes">
+      <br />
+
+      <mat-list-item routerLink="/notes" routerLinkActive="active-list-item">
         <p matLine *ngIf="opened">Notes</p>
         <div
           class="icon-container"
@@ -29,7 +26,7 @@
           <mat-icon mat-list-icon>sticky_note_2</mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/draw">
+      <mat-list-item routerLink="/draw" routerLinkActive="active-list-item">
         <p matLine *ngIf="opened">Draw</p>
         <div
           class="icon-container"
@@ -39,7 +36,10 @@
           <mat-icon mat-list-icon>gesture</mat-icon>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/reminders">
+      <mat-list-item
+        routerLink="/reminders"
+        routerLinkActive="active-list-item"
+      >
         <p matLine *ngIf="opened">Reminders</p>
         <div
           class="icon-container"
@@ -47,6 +47,27 @@
           matTooltipShowDelay="1000"
         >
           <mat-icon mat-list-icon>notifications</mat-icon>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item
+        class="user"
+        *ngIf="loggedIn()"
+        matTooltip="Hello {{ uname }}"
+      >
+        <p matLine *ngIf="opened">Hello {{ uname }}</p>
+        <div class="icon-container">
+          <mat-icon mat-list-icon>face</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="logout" (click)="logout()" *ngIf="loggedIn()">
+        <p matLine *ngIf="opened">Logout</p>
+        <div
+          class="icon-container"
+          matTooltip="Logout"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>exit_to_app</mat-icon>
         </div>
       </mat-list-item>
     </mat-nav-list>

@@ -1,8 +1,21 @@
 <div class="container">
   <div class="row page-title">Quick Notes</div>
   <br />
+
   <button
-    class="pull-right add-new"
+    mat-fab
+    [matTooltip]="showAll ? 'Show Pinned Notes' : 'Show All Notes'"
+    [ngClass]="showAll ? 'show-pinned-all rotate' : 'show-pinned-all'"
+    matTooltipPosition="left"
+    (click)="showPinned()"
+  >
+    <mat-icon>
+      {{ showAll ? "push_pin" : "library_books" }}
+    </mat-icon>
+  </button>
+
+  <button
+    [ngClass]="empty ? 'breathing-button shadow' : 'add-new shadow'"
     mat-fab
     color="accent"
     (click)="addNew()"
@@ -10,18 +23,32 @@
     matTooltipShowDelay="1000"
     matTooltipPosition="left"
   >
-    <mat-icon>add</mat-icon>
+    <mat-icon class="add">add</mat-icon>
   </button>
-  <div class="row notes-container">
-    <div *ngFor="let note of notes" @fadeIn>
-      <app-note
-        [id]="note.id"
-        [title]="note.title"
-        [content]="note.content"
-        [activeColor]="note.color"
-        [locked]="note.locked"
-        [pinned]="note.pinned"
-      ></app-note>
+
+  <ng-container *ngIf="empty; else nonEmptyTemplate">
+    <div class="empty-outer">
+      <span class="empty" *ngIf="showAll">
+        You don't have any notes<br /><br /><br />Add one by clicking add button
+      </span>
+      <span class="empty" *ngIf="!showAll">
+        You don't have any pinned notes<br /><br /><br />Add one by clicking pin
+        icon at the bottom of a note
+      </span>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #nonEmptyTemplate>
+    <div class="row notes-container">
+      <div *ngFor="let note of notes" @fadeIn>
+        <app-note
+          [id]="note.id"
+          [title]="note.title"
+          [content]="note.content"
+          [activeColor]="note.color"
+          [locked]="note.locked"
+          [pinned]="note.pinned"
+        ></app-note>
+      </div>
+    </div>
+  </ng-template>
 </div>
