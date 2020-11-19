@@ -2,7 +2,7 @@
   <div class="row page-title">Quick Notes</div>
   <br />
 
-  <button
+  <!-- <button
     mat-fab
     [matTooltip]="showAll ? 'Show Pinned Notes' : 'Show All Notes'"
     [ngClass]="showAll ? 'show-pinned-all rotate' : 'show-pinned-all'"
@@ -12,7 +12,32 @@
     <mat-icon>
       {{ showAll ? "push_pin" : "library_books" }}
     </mat-icon>
-  </button>
+  </button> -->
+
+  <mat-button-toggle-group
+    #group="matButtonToggleGroup"
+    value="all"
+    class="show-pinned-all"
+  >
+    <mat-button-toggle
+      aria-label="Show all notes"
+      matTooltip="All Notes"
+      matTooltipPosition="above"
+      (click)="showPinned('all')"
+      value="all"
+    >
+      <mat-icon>view_module</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle
+      aria-label="Show pinned notes"
+      matTooltip="Pinned Notes"
+      matTooltipPosition="above"
+      (click)="showPinned('pin')"
+      value="pin"
+    >
+      <mat-icon class="rotate">push_pin</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 
   <button
     [ngClass]="empty ? 'breathing-button shadow' : 'add-new shadow'"

@@ -62,8 +62,12 @@ export class AllNotesComponent implements OnInit {
     this.empty = false;
   }
 
-  showPinned(): void {
-    this.showAll = !this.showAll;
+  showPinned(val: string): void {
+    if (val === 'pin') {
+      this.showAll = false;
+    } else {
+      this.showAll = true;
+    }
     if (this.showAll) {
       this.notes = this.notesService.notes;
     } else {

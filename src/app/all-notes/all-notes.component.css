@@ -3,6 +3,11 @@
   height: 100%;
 }
 
+.mat-button-toggle-checked {
+  background-color: #999999;
+  color: rgb(53, 53, 53);
+}
+
 @keyframes MyAnimation {
   0% {
     padding-left: 100px;
@@ -161,6 +166,7 @@
   font-size: 30px;
   background-color: transparent;
   box-shadow: none;
+  border-radius: 30px;
 }
 
 .rotate {
