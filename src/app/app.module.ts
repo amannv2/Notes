@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -42,9 +42,11 @@ import { DrawComponent } from './draw/draw.component';
 import { HomeComponent } from './home/home.component';
 import { NoteComponent } from './all-notes/note/note.component';
 import { AllNotesComponent } from './all-notes/all-notes.component';
+import { NotFoundComponent } from './error/not-found/not-found.component';
+import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
-import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
+import { ServerDownComponent } from './error/server-down/server-down.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -66,6 +68,14 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService],
     component: HomeComponent,
   },
+  {
+    path: 'maintenance',
+    component: ServerDownComponent,
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+  },
   { path: '**', redirectTo: 'not-found' },
 ];
 
@@ -75,9 +85,11 @@ const appRoutes: Routes = [
     NoteComponent,
     DrawComponent,
     HomeComponent,
+    NotFoundComponent,
     AllNotesComponent,
     ReminderComponent,
     DialogBoxComponent,
+    ServerDownComponent,
     AllRemindersComponent,
   ],
   imports: [
@@ -99,6 +111,7 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    ReactiveFormsModule,
     MatButtonToggleModule,
     CanvasWhiteboardModule,
     BrowserAnimationsModule,

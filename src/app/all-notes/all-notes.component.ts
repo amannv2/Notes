@@ -1,7 +1,18 @@
+import { Router } from '@angular/router';
 import { Note } from './note/note.model';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+
+const colorCode = {
+  Black: '#4a4e4d',
+  Blue: '#0e9aa7',
+  Cyan: '#3da4ab',
+  Yellow: '#f6cd61',
+  Orange: '#fe8a71',
+  Red: '#ec524b',
+};
 
 @Component({
   selector: 'app-all-notes',
@@ -21,8 +32,19 @@ export class AllNotesComponent implements OnInit {
   firstLoad = true;
   empty: boolean;
   showAll = true;
+  filter = false;
+  colors = new FormControl();
+  serverDown: boolean;
+  colorList = [
+    { value: 'Black', code: '#4a4e4d' },
+    { value: 'Blue', code: '#0e9aa7' },
+    { value: 'Cyan', code: '#3da4ab' },
+    { value: 'Yellow', code: '#f6cd61' },
+    { value: 'Orange', code: '#fe8a71' },
+    { value: 'Red', code: '#ec524b' },
+  ];
 
-  constructor(private notesService: NotesService) {
+  constructor(private notesService: NotesService, private router: Router) {
     // this.notesService.getNotes().subscribe((data: Note[]) => {
     //   this.notes = data;
     //   this.sortByPin();
@@ -41,7 +63,11 @@ export class AllNotesComponent implements OnInit {
 
   ngOnInit(): void {
     setInterval(() => {
-      if (this.showAll) {
+      if (this.notesService.serverDown) {
+        this.router.navigate(['/maintenance']);
+      }
+
+      if (this.showAll && !this.filter) {
         this.notes = this.notesService.notes;
       }
 
@@ -49,6 +75,7 @@ export class AllNotesComponent implements OnInit {
         this.sortByPin();
         this.firstLoad = false;
       }
+
       if (this.notes.length === 0) {
         this.empty = true;
       } else {
@@ -72,6 +99,18 @@ export class AllNotesComponent implements OnInit {
       this.notes = this.notesService.notes;
     } else {
       this.notes = this.notes.filter(({ pinned }) => pinned === true);
+    }
+  }
+
+  filterByColors(): void {
+    if (this.colors.value.length === 0) {
+      this.filter = false;
+    } else {
+      this.filter = true;
+
+      this.notes = this.notes.filter(({ color }) =>
+        this.colors.value.includes(color)
+      );
     }
   }
 }

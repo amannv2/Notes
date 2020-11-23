@@ -1,44 +1,46 @@
 <div class="container">
   <div class="row page-title">Quick Notes</div>
-  <br />
-  <br />
 
-  <!-- <button
-    mat-fab
-    [matTooltip]="showAll ? 'Show Pinned Notes' : 'Show All Notes'"
-    [ngClass]="showAll ? 'show-pinned-all rotate' : 'show-pinned-all'"
-    matTooltipPosition="left"
-    (click)="showPinned()"
-  >
-    <mat-icon>
-      {{ showAll ? "push_pin" : "library_books" }}
-    </mat-icon>
-  </button> -->
-
-  <mat-button-toggle-group
-    #group="matButtonToggleGroup"
-    value="all"
-    class="show-pinned-all"
-  >
-    <mat-button-toggle
-      aria-label="Show all notes"
-      matTooltip="All Notes"
-      matTooltipPosition="above"
-      (click)="showPinned('all')"
+  <div class="toolbar">
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
       value="all"
+      class="show-pinned-all"
     >
-      <mat-icon>view_module</mat-icon>
-    </mat-button-toggle>
-    <mat-button-toggle
-      aria-label="Show pinned notes"
-      matTooltip="Pinned Notes"
-      matTooltipPosition="above"
-      (click)="showPinned('pin')"
-      value="pin"
-    >
-      <mat-icon class="rotate">push_pin</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+      <mat-button-toggle
+        aria-label="Show all notes"
+        matTooltip="All Notes"
+        matTooltipPosition="above"
+        (click)="showPinned('all')"
+        value="all"
+      >
+        <mat-icon>view_module</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle
+        aria-label="Show pinned notes"
+        matTooltip="Pinned Notes"
+        matTooltipPosition="above"
+        (click)="showPinned('pin')"
+        value="pin"
+      >
+        <mat-icon class="rotate">push_pin</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <div class="search-by-color">
+      <mat-form-field appearance="outline" class="color-select">
+        <mat-label>Filter notes by color(s)</mat-label>
+        <mat-select [formControl]="colors" multiple>
+          <mat-option
+            *ngFor="let color of colorList"
+            (click)="filterByColors()"
+            [value]="color.code"
+            >{{ color.value }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
   <button
     [ngClass]="empty ? 'breathing-button shadow' : 'add-new shadow'"

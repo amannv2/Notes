@@ -1,0 +1,26 @@
+.not-found-outer {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.not-found {
+  color: #363636;
+  font-family: "Comfortaa", cursive;
+  font-size: 16px;
+
+  height: 50%;
+  width: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://image.freepik.com/free-vector/document-pages-trash-bucket_24911-14377.jpg");
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+p {
+  text-align: left;
+  font-size: larger;
+  padding-left: 12px;
+}

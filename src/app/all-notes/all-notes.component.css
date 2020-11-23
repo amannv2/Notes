@@ -158,10 +158,8 @@
 }
 
 .show-pinned-all {
-  position: fixed;
-  top: 90px;
-  right: 30px;
-  cursor: pointer;
+  float: right;
+  margin-right: 2%;
   color: black;
   font-size: 30px;
   background-color: transparent;
@@ -169,6 +167,51 @@
   border-radius: 30px;
 }
 
+.toolbar {
+  overflow: hidden;
+  margin-bottom: 8px;
+  margin-top: -5px;
+}
+
 .rotate {
   transform: rotate(25deg);
+}
+
+.search-by-color {
+  float: right;
+  margin-right: 1%;
+}
+
+.color-select {
+  color: #495464;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #4a4e4d !important;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick {
+  color: #4a4e4d !important;
+}
+
+::ng-deep .mat-input-element {
+  caret-color: #4a4e4d !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #4a4e4d !important;
+}
+
+::ng-deep .mat-select-value-text {
+  color: rgba(0, 0, 0, 0.88);
+}
+
+::ng-deep .mat-select-arrow {
+  color: rgba(0, 0, 0, 0.88);
 }

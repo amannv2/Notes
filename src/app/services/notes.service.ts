@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({ providedIn: 'root' })
 export class NotesService {
   notes: Note[] = [];
+  serverDown = false;
   readonly owner = this.cookieService.get('uname');
 
   constructor(
@@ -15,11 +16,16 @@ export class NotesService {
     private snackBar: MatSnackBar,
     private cookieService: CookieService
   ) {
-    this.httpService
-      .sendGetRequest('/notes/' + this.owner)
-      .subscribe((data: Note[]) => {
+    this.httpService.sendGetRequest('/notes/' + this.owner).subscribe(
+      (data: Note[]) => {
+        this.serverDown = false;
         this.notes = data;
-      });
+      },
+      (err: any) => {
+        this.serverDown = true;
+        // console.log(err);
+      }
+    );
   }
 
   generateSnack(message: string, action: string): void {
