@@ -67,7 +67,7 @@
   </ng-container>
   <ng-template #nonEmptyTemplate>
     <div class="row notes-container">
-      <div *ngFor="let note of notes" @fadeIn>
+      <div *ngFor="let note of notes" @fadeIn class="note-div">
         <app-note
           [id]="note.id"
           [title]="note.title"

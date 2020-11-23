@@ -1,9 +1,7 @@
 .note-card {
-  width: 29%;
-  height: 25%;
-  margin: 2%;
+  width: auto;
+  max-width: 95vw;
   border-radius: 15px;
-  float: left;
   background-color: #0e9aa7;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -30,12 +28,22 @@
   margin-top: -20px;
 }
 
+.note-content-container:hover ~ .footer {
+  opacity: 1;
+}
+
 .footer {
+  overflow: hidden;
   padding-right: 15px;
+  opacity: 0;
+}
+
+.footer:hover {
+  opacity: 1;
 }
 
 .lock-btn {
-  margin-left: 10px;
+  margin-left: 2px;
   opacity: 0.5;
   background-color: transparent;
   box-shadow: none;
@@ -55,11 +63,12 @@
 }
 
 .grad-colors {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   margin-left: 20px;
-  margin-top: 7px;
+  margin-right: 3px;
+  margin-top: 10px;
   background-image: linear-gradient(
     to right,
     rgba(255, 0, 0, 0.3),
@@ -76,7 +85,7 @@
   border-radius: 50%;
   outline: none;
   border: none;
-  margin-left: 10px;
+  margin-left: 3px;
   margin-top: 10px;
   float: left;
 }
