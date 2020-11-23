@@ -5,6 +5,16 @@
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
 */
 {
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": false
+  },
+  "compilerOptions": {
+    "allowJs": true,
+    // other options
+    "experimentalDecorators": true
+  },
   "files": [],
   "references": [
     {
@@ -16,5 +26,5 @@
     {
       "path": "./e2e/tsconfig.json"
     }
-]
+  ]
 }

@@ -1,0 +1,26 @@
+.server-down-outer {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.server-down {
+  color: #363636;
+  font-family: "Indie Flower", cursive;
+  font-size: 16px;
+
+  display: grid;
+  place-items: center;
+  height: 360px;
+  width: 360px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("https://png.pngtree.com/png-vector/20200605/ourmid/pngtree-abstract-tear-paper-background-sticky-notes-on-gray-background-png-image_2219261.jpg");
+  transform: scale(1.5);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+p {
+  padding-left: 12px;
+}

@@ -1,0 +1,106 @@
+.note-card {
+  width: 29%;
+  height: 25%;
+  margin: 2%;
+  border-radius: 15px;
+  float: left;
+  background-color: #0e9aa7;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.note-card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 100%;
+}
+
+.note-title {
+  width: 100%;
+}
+
+.note-content {
+  width: 95%;
+  margin-left: 2%;
+  resize: none;
+}
+
+.note-content-container {
+  margin-top: -20px;
+}
+
+.footer {
+  padding-right: 15px;
+}
+
+.lock-btn {
+  margin-left: 10px;
+  opacity: 0.5;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.lock-btn:hover {
+  opacity: 1;
+}
+
+.lock-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.171);
+}
+
+.top-right {
+  margin-left: auto;
+}
+
+.grad-colors {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-top: 7px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.3),
+    rgba(255, 166, 0, 0.3),
+    rgba(255, 255, 0, 0.3),
+    rgba(0, 128, 0, 0.3)
+  );
+  float: left;
+}
+
+.note-colors {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  margin-left: 10px;
+  margin-top: 10px;
+  float: left;
+}
+
+.cfe8a71 {
+  background-color: #fe8a71;
+}
+
+.cf6cd61 {
+  background-color: #f6cd61;
+}
+
+.c3da4ab {
+  background-color: #3da4ab;
+}
+
+.c0e9aa7 {
+  background-color: #0e9aa7;
+}
+
+.c4a4e4d {
+  background-color: #4a4e4d;
+}
+
+.cec524b {
+  background-color: #ec524b;
+}

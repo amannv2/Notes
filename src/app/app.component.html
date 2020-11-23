@@ -1,16 +1,78 @@
-<div class="container">
-  <div class="row page-title">Quick Notes</div>
-  <div class="row page-header">
-    <button
-      class="pull-right add-new"
-      mat-fab
-      color="accent"
-      (click)="addNew()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-  <div class="row notes-container">
-    <app-note *ngFor="let note of notes"></app-note>
-  </div>
-</div>
+<mat-sidenav-container
+  id="sidenav"
+  class="sidenav-container"
+  fullscreen
+  autosize
+>
+  <mat-sidenav #sidenav class="page-sidenav" mode="side" opened="true">
+    <mat-nav-list>
+      <mat-list-item (click)="opened = !opened">
+        <div class="nav-container">
+          <button mat-icon-button matTooltipShowDelay="1000">
+            <mat-icon *ngIf="!opened">chevron_right</mat-icon>
+            <mat-icon *ngIf="opened">chevron_left</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      <br />
+
+      <mat-list-item routerLink="/notes" routerLinkActive="active-list-item">
+        <p matLine *ngIf="opened">Notes</p>
+        <div
+          class="icon-container"
+          matTooltip="Notes"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>sticky_note_2</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item routerLink="/draw" routerLinkActive="active-list-item">
+        <p matLine *ngIf="opened">Draw</p>
+        <div
+          class="icon-container"
+          matTooltip="Draw"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>gesture</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item
+        routerLink="/reminders"
+        routerLinkActive="active-list-item"
+      >
+        <p matLine *ngIf="opened">Reminders</p>
+        <div
+          class="icon-container"
+          matTooltip="Reminders"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>notifications</mat-icon>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item
+        class="user"
+        *ngIf="loggedIn()"
+        matTooltip="Hello {{ getUname() }}"
+      >
+        <p matLine *ngIf="opened">Hello {{ getUname() }}</p>
+        <div class="icon-container">
+          <mat-icon mat-list-icon>face</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="logout" (click)="logout()" *ngIf="loggedIn()">
+        <p matLine *ngIf="opened">Logout</p>
+        <div
+          class="icon-container"
+          matTooltip="Logout"
+          matTooltipShowDelay="1000"
+        >
+          <mat-icon mat-list-icon>exit_to_app</mat-icon>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

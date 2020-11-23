@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row page-title">Reminders</div>
+  <br />
+  <button
+    class="pull-right add-new"
+    mat-fab
+    color="accent"
+    (click)="addNew()"
+    matTooltip="Add New Note"
+    matTooltipShowDelay="1000"
+    matTooltipPosition="left"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="row notes-container">
+    <div *ngFor="let reminder of reminders" @fadeIn>
+      <app-reminder
+        [id]="reminder.id"
+        [content]="reminder.content"
+        [time]="reminder.time"
+      ></app-reminder>
+    </div>
+  </div>
+</div>

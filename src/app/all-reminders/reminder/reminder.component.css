@@ -1,0 +1,65 @@
+.reminder-card {
+  width: 29%;
+  height: 25%;
+  margin: 2%;
+  border-radius: 15px;
+  float: left;
+  background-color: #0e9aa7;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.top-right {
+  margin-left: auto;
+}
+
+.reminder-title {
+  width: 20vw !important;
+}
+
+.reminder-card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.am {
+  margin-top: 5px;
+}
+
+.pm {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.am-pm-active {
+  color: black;
+  background-color: rgba(99, 98, 98, 0.349);
+}
+
+.reminder-input {
+  width: 23% !important;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.reminder-hour {
+  width: 15% !important;
+  margin-right: 5px;
+  margin-left: 5px;
+  float: right;
+}
+
+.reminder-min {
+  width: 17% !important;
+  margin-right: 5px;
+  margin-left: 5px;
+  float: right;
+}
+
+.save-btn {
+  background-color: transparent;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.save-btn:hover {
+  opacity: 1;
+}
