@@ -26,7 +26,14 @@ It also supports drawing on a canvas.
 1. Clone [this](https://github.com/amannv2/Notes-Backend) repo
 2. Install dependencies - `npm i`
 3. Start the server - `node server.js`
-   - You'll need the connection string for mongodb
+   - You'll need the connection string for mongodb. So, you can create a cluster on Mongo Atlas and use it's connection string.
+
+## Run using Docker:
+
+1. Pull image from Docker hub - `docker pull amannv2/notes:latest`
+2. Run image: `docker run -d -p 80:80/tcp amannv2/notes:latest`
+   - Open `localhost:80` on a Web Browser
+3. Setup backend as mentioned [above](https://github.com/amannv2/Notes#setup-back-end)
 
 ## Screenshots
 

@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const baseURL = 'http://localhost:3000';
+const baseURL = 'http://13.233.120.170:3000';
 const header = { 'content-type': 'application/json' };
 
 @Injectable({

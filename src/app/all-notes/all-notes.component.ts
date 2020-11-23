@@ -45,23 +45,6 @@ export class AllNotesComponent implements OnInit {
   ];
 
   constructor(private notesService: NotesService, private router: Router) {
-    // this.notesService.getNotes().subscribe((data: Note[]) => {
-    //   this.notes = data;
-    //   this.sortByPin();
-    //   // console.log(this.notes);
-    // });
-  }
-
-  sortByPin(): void {
-    this.notes.forEach((note, i): void => {
-      if (note.pinned) {
-        this.notes.splice(i, 1);
-        this.notes.unshift(note);
-      }
-    });
-  }
-
-  ngOnInit(): void {
     setInterval(() => {
       if (this.notesService.serverDown) {
         this.router.navigate(['/maintenance']);
@@ -83,6 +66,17 @@ export class AllNotesComponent implements OnInit {
       }
     }, 500);
   }
+
+  sortByPin(): void {
+    this.notes.forEach((note, i): void => {
+      if (note.pinned) {
+        this.notes.splice(i, 1);
+        this.notes.unshift(note);
+      }
+    });
+  }
+
+  ngOnInit(): void {}
 
   addNew(): void {
     this.notesService.addNew();

@@ -28,15 +28,6 @@ import { QuillModule } from 'ngx-quill';
 import { environment } from '../environments/environment';
 import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 
-import { CookieService } from 'ngx-cookie-service';
-import { HttpService } from './services/http.service';
-import { NotesService } from './services/notes.service';
-import { RemindersService } from './services/reminders.service';
-import { AuthGuardService } from './services/auth-guard.service';
-import { AuthServiceService } from './services/auth-service.service';
-import { ConfirmDialogService } from './services/confirmDialog.service';
-import { PushNotificationsService } from './services/notification.service';
-
 import { AppComponent } from './app.component';
 import { DrawComponent } from './draw/draw.component';
 import { HomeComponent } from './home/home.component';
@@ -47,6 +38,16 @@ import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
 import { ServerDownComponent } from './error/server-down/server-down.component';
+
+import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from './services/http.service';
+import { NotesService } from './services/notes.service';
+import { EnvServiceProvider } from './env.service.provider';
+import { RemindersService } from './services/reminders.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthServiceService } from './services/auth-service.service';
+import { ConfirmDialogService } from './services/confirmDialog.service';
+import { PushNotificationsService } from './services/notification.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -129,6 +130,7 @@ const appRoutes: Routes = [
     RemindersService,
     AuthGuardService,
     AuthServiceService,
+    EnvServiceProvider,
     ConfirmDialogService,
     PushNotificationsService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
