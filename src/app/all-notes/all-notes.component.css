@@ -31,8 +31,12 @@
   place-items: center;
 }
 
-.notes-container {
-  margin-top: -2%;
+.note-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  float: left;
 }
 
 .page-header {
