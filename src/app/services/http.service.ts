@@ -1,29 +1,33 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { EnvService } from '../env.service';
 import { HttpClient } from '@angular/common/http';
 
-const baseURL = 'http://13.233.120.170:3000';
 const header = { 'content-type': 'application/json' };
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) {}
+  baseURL: string;
+
+  constructor(private http: HttpClient, private env: EnvService) {
+    this.baseURL = env.apiUrl;
+  }
 
   sendGetRequest(url: string): Observable<{}> {
-    return this.http.get(baseURL + url, { headers: header });
+    return this.http.get(this.baseURL + url, { headers: header });
   }
 
   sendPostRequest(url: string, body: string): Observable<{}> {
-    return this.http.post(baseURL + url, body, { headers: header });
+    return this.http.post(this.baseURL + url, body, { headers: header });
   }
 
   sendPatchRequest(url: string, body: string): Observable<{}> {
-    return this.http.patch(baseURL + url, body, { headers: header });
+    return this.http.patch(this.baseURL + url, body, { headers: header });
   }
 
   sendDeleteRequest(url: string): Observable<{}> {
-    return this.http.delete(baseURL + url, { headers: header });
+    return this.http.delete(this.baseURL + url, { headers: header });
   }
 }

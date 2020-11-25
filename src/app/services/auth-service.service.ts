@@ -22,6 +22,10 @@ export class AuthServiceService {
     return this.cookieService.get('uname');
   }
 
+  getSecret(): string {
+    return this.cookieService.get('pass');
+  }
+
   hashIt(pass: string): string {
     let hash = 0;
     let char: number;

@@ -12,6 +12,8 @@
   );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  display: grid;
+  place-items: center;
 }
 
 @keyframes gradient {
@@ -50,8 +52,8 @@
   float: left;
   background-color: #0e9aa7;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin-left: 31.5vw;
-  margin-top: 15vw;
+  /* margin-left: 31.5vw;
+  margin-top: 15vw; */
 }
 
 .note-card:hover {

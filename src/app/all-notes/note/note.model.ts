@@ -5,6 +5,7 @@ export class Note {
   color: string;
   locked: boolean;
   pinned: boolean;
+  archived: boolean;
   owner: string;
 
   constructor(
@@ -14,6 +15,7 @@ export class Note {
     color: string,
     locked: boolean,
     pinned: boolean,
+    archived: boolean,
     owner: string
   ) {
     this.id = id;
@@ -22,6 +24,7 @@ export class Note {
     this.color = color;
     this.pinned = pinned;
     this.locked = locked;
+    this.archived = archived;
     this.owner = owner;
   }
 }
