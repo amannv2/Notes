@@ -4,15 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-
-const colorCode = {
-  Black: '#4a4e4d',
-  Blue: '#0e9aa7',
-  Cyan: '#3da4ab',
-  Yellow: '#f6cd61',
-  Orange: '#fe8a71',
-  Red: '#ec524b',
-};
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-notes',
@@ -29,12 +21,15 @@ const colorCode = {
 })
 export class AllNotesComponent implements OnInit {
   notes: Note[] = [];
-  firstLoad = true;
-  empty: boolean;
   showAll = true;
   filter = false;
-  colors = new FormControl();
+  empty: boolean;
+  firstLoad = true;
+  showPinned = true;
+  isSyncing = true;
   serverDown: boolean;
+  showArchived = false;
+  colors = new FormControl();
   colorList = [
     { value: 'Black', code: '#4a4e4d' },
     { value: 'Blue', code: '#0e9aa7' },
@@ -45,26 +40,50 @@ export class AllNotesComponent implements OnInit {
   ];
 
   constructor(private notesService: NotesService, private router: Router) {
-    setInterval(() => {
-      if (this.notesService.serverDown) {
-        this.router.navigate(['/maintenance']);
-      }
+    this.notesService.getNotes().subscribe((data: []) => {
+      this.notes = data;
+      // this.loadNotes();
+    });
+    setTimeout(() => {
+      this.showAllNotes();
+      setTimeout(() => {
+        this.isSyncing = false;
+      }, 400);
+    }, 600);
+  }
 
-      if (this.showAll && !this.filter) {
-        this.notes = this.notesService.notes;
-      }
+  loadNotes(): void {
+    if (this.notesService.serverDown) {
+      // this.router.navigate(['/maintenance']);
+    }
 
-      if (this.firstLoad) {
-        this.sortByPin();
-        this.firstLoad = false;
-      }
+    if (
+      this.showAll &&
+      !this.filter &&
+      !this.showPinned &&
+      !this.showArchived
+    ) {
+      this.notes = this.notesService.notes.filter(
+        ({ archived }) => archived !== true
+      );
+    }
 
-      if (this.notes.length === 0) {
-        this.empty = true;
-      } else {
-        this.empty = false;
-      }
-    }, 500);
+    if (this.showArchived) {
+      this.notes = this.notesService.notes.filter(
+        ({ archived }) => archived === true
+      );
+    }
+
+    if (this.firstLoad) {
+      this.sortByPin();
+      this.firstLoad = false;
+    }
+
+    if (this.notes.length === 0) {
+      this.empty = true;
+    } else {
+      this.empty = false;
+    }
   }
 
   sortByPin(): void {
@@ -76,23 +95,43 @@ export class AllNotesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showAllNotes();
+  }
 
   addNew(): void {
     this.notesService.addNew();
     this.empty = false;
+    this.loadNotes();
   }
 
-  showPinned(val: string): void {
-    if (val === 'pin') {
-      this.showAll = false;
-    } else {
-      this.showAll = true;
+  showAllNotes(): void {
+    this.showAll = true;
+    this.showPinned = false;
+    this.showArchived = false;
+    this.notes = this.notesService.notes;
+    this.loadNotes();
+  }
+
+  showArchivedNotes(): void {
+    this.showAll = false;
+    this.showPinned = false;
+    this.showArchived = true;
+    this.notes = this.notesService.notes.filter(
+      ({ archived }) => archived === true
+    );
+    if (this.notes.length === 0) {
+      this.empty = true;
     }
-    if (this.showAll) {
-      this.notes = this.notesService.notes;
-    } else {
-      this.notes = this.notes.filter(({ pinned }) => pinned === true);
+  }
+
+  showPinnedNotes(): void {
+    this.showAll = false;
+    this.showPinned = true;
+    this.showArchived = false;
+    this.notes = this.notes.filter(({ pinned }) => pinned === true);
+    if (this.notes.length === 0) {
+      this.empty = true;
     }
   }
 
@@ -106,5 +145,19 @@ export class AllNotesComponent implements OnInit {
         this.colors.value.includes(color)
       );
     }
+  }
+
+  onSync(): void {
+    this.isSyncing = true;
+    this.notes.forEach((note) => {
+      this.notesService.updateNote(note);
+    });
+    setTimeout(() => {
+      this.isSyncing = false;
+    }, 3000);
+  }
+
+  updateNotes(event: any): void {
+    this.loadNotes();
   }
 }

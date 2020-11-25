@@ -1,9 +1,9 @@
 import * as Quill from 'quill';
-import { Component, Input, OnInit } from '@angular/core';
 import { NotesService } from '../../services/notes.service';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ConfirmDialogService } from 'src/app/services/confirmDialog.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-note',
@@ -28,59 +28,24 @@ export class NoteComponent implements OnInit {
   @Input() content: string;
   @Input() locked: boolean;
   @Input() pinned: boolean;
+  @Input() archived: boolean;
   @Input() activeColor: string;
+
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+
   editor: Quill;
   modules = {};
+  temp: string;
   showColors = false;
   titlePlaceholder = 'Note Title';
-  temp: string;
   pinTooltip = 'Pin note at the top';
+  archiveTooltip = 'Archive note';
   lockTooltip = 'Disable editing';
-
-  // blured = false;
-  // focused = false;
-  //
-  // (onEditorChanged)="changedEditor($event)"
-  changedEditor(event: EditorChangeContent | EditorChangeSelection): void {
-    if (event.event === 'text-change') {
-      this.temp = event.html;
-    }
-    if (this.showColors) {
-      this.showColors = false;
-    }
-  }
-
-  changeTitle(title: string): void {
-    this.notesService.setTitle(this.id, title);
-  }
-  //
-  // created(event) {
-  //   // tslint:disable-next-line:no-console
-  //   console.log('editor-created', event);
-  // }
-  // focus($event) {
-  // tslint:disable-next-line:no-console
-  // console.log('focus', $event);
-  // this.focused = true;
-  // this.blured = false;
-  // }
-  //
-  blur($event: any): void {
-    // tslint:disable-next-line:no-console
-    // console.log('blur', this.temp);
-    this.notesService.setContent(this.id, this.temp);
-    if (this.showColors) {
-      this.showColors = false;
-    }
-    // this.focused = false;
-    // this.blured = true;
-  }
 
   constructor(
     private notesService: NotesService,
     private dialogService: ConfirmDialogService
   ) {
-    // this.id = this.notesService.getCounter();
     this.modules = {
       toolbar: [
         [{ font: [] }],
@@ -107,7 +72,33 @@ export class NoteComponent implements OnInit {
     this.activeColor = this.notesService.getColor(this.id);
     this.pinned = this.notesService.getPinnedStatus(this.id);
     this.locked = this.notesService.getLockStatus(this.id);
+    this.archived = this.notesService.getArchivedStatus(this.id);
     this.getToolTips();
+  }
+
+  changedEditor(event: EditorChangeContent | EditorChangeSelection): void {
+    if (event.event === 'text-change') {
+      this.temp = event.html;
+    }
+
+    if (this.showColors) {
+      this.showColors = false;
+    }
+  }
+
+  changeTitle(title: string): void {
+    this.notesService.setTitle(this.id, title);
+  }
+
+  blur($event: any): void {
+    // tslint:disable-next-line:no-console
+    if (this.temp !== undefined) {
+      this.notesService.setContent(this.id, this.temp);
+    }
+
+    if (this.showColors) {
+      this.showColors = false;
+    }
   }
 
   getTitlePlaceholder(): string {
@@ -137,6 +128,7 @@ export class NoteComponent implements OnInit {
     this.dialogService.confirmed().subscribe((confirmed) => {
       if (confirmed) {
         this.notesService.deleteNote(this.id);
+        this.notifyParent.emit();
       }
     });
   }
@@ -144,6 +136,7 @@ export class NoteComponent implements OnInit {
   onPin(): void {
     this.pinned = !this.pinned;
     this.notesService.pinNote(this.id, this.pinned);
+    this.notifyParent.emit();
     this.getToolTips();
   }
 
@@ -164,5 +157,18 @@ export class NoteComponent implements OnInit {
     } else {
       this.pinTooltip = 'Pin note at the top';
     }
+    if (this.archived) {
+      this.archiveTooltip = 'Unarchive Note';
+    } else {
+      this.archiveTooltip = 'Archive note';
+    }
+  }
+
+  onArchive(): void {
+    this.archived = !this.archived;
+    this.pinned = false;
+    this.notesService.archiveNote(this.id, this.archived, this.pinned);
+    this.getToolTips();
+    this.notifyParent.emit();
   }
 }

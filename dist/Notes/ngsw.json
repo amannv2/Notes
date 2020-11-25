@@ -1,0 +1,116 @@
+{
+  "configVersion": 1,
+  "timestamp": 1606299050690,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/4.53b360f53daa8748cd98.js",
+        "/env.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.9352b4efc4f2f67309de.js",
+        "/manifest.webmanifest",
+        "/polyfills.a4021de53358bb0fec14.js",
+        "/runtime.91c9b6e9c1ce6c25ab98.js",
+        "/scripts.7e3c12780cbda2cc3f17.js",
+        "/styles.7b9a22c1da88bfb88311.css"
+      ],
+      "patterns": [
+        "https:\\/\\/fonts\\.gstatic\\.com",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/css2\\?family=Comfortaa:wght@700&amp;display=swap",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/css\\?family=Roboto:300,400,500&amp;display=swap",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/icon\\?family=Material\\+Icons",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/icon\\?family=Material\\+Icons|Material\\+Icons\\+Outlined"
+      ]
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/quick-notes-128.png",
+        "/assets/icons/quick-notes-512.png",
+        "/assets/icons/quick-notes-72.png",
+        "/assets/icons/quick-notes-96.png",
+        "/assets/images/bell.png",
+        "/assets/screenshots/1.png",
+        "/assets/screenshots/2.png",
+        "/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
+        "/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf",
+        "/glyphicons-halflings-regular.5be1347c682810f199c7.eot",
+        "/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff",
+        "/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "notes",
+      "patterns": [
+        "http:\\/\\/localhost:3000\\/notes"
+      ],
+      "strategy": "freshness",
+      "maxSize": 10,
+      "maxAge": 172800000,
+      "timeoutMs": 30000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/4.53b360f53daa8748cd98.js": "d193ebdb11607479c9d2ba878c3d30b94597a83c",
+    "/assets/icons/quick-notes-128.png": "8b1416ba7458a4915881ecd4c924f31e2206d9bc",
+    "/assets/icons/quick-notes-512.png": "dca39de441718954ee796d90e4fa76c59c8d7820",
+    "/assets/icons/quick-notes-72.png": "80cc35cbfbc9b1e66669db48108867ab0ff49548",
+    "/assets/icons/quick-notes-96.png": "4c8fd9dc536b41da11510fd6610415da5652d6bf",
+    "/assets/images/bell.png": "3b7dd9a2f69deebbb4759fa481861fe63a705d1c",
+    "/assets/screenshots/1.png": "71d514cab87faadad4108fefb3f8428dbb7fb419",
+    "/assets/screenshots/2.png": "944898392c8614833dc7bfd4c1330d6ea39273f2",
+    "/env.js": "d509195a3b413dad4bc5c88970bde12c2b57492a",
+    "/favicon.ico": "cb16d8474f2b3497525ee3dba04a82ee9829a2ef",
+    "/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg": "de51a8494180a6db074af2dee2383f0a363c5b08",
+    "/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf": "44bc1850f570972267b169ae18f1cb06b611ffa2",
+    "/glyphicons-halflings-regular.5be1347c682810f199c7.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
+    "/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
+    "/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
+    "/index.html": "0f210a38c61ce4dff628e22525e3b760aa6b0e20",
+    "/main.9352b4efc4f2f67309de.js": "534eb17b6bbd58444a5469f4d72d71310c6a2aa1",
+    "/manifest.webmanifest": "d15224818253cbfa0d9b982c31930c94cf32dbba",
+    "/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
+    "/runtime.91c9b6e9c1ce6c25ab98.js": "1b0d3eed38bab4c99f626060f0f3f81c68ca9a4f",
+    "/scripts.7e3c12780cbda2cc3f17.js": "154865e5f5872065dfb3265f72793950e9c9c99c",
+    "/styles.7b9a22c1da88bfb88311.css": "ffc099035638d24773a95eae9ce3834b4887d7b8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

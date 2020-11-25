@@ -1,44 +1,76 @@
+<div class="loading" *ngIf="isSyncing">
+  <span class="loading-span">
+    <span class="loader"></span>
+  </span>
+</div>
+
 <div class="container">
   <div class="row page-title">Quick Notes</div>
 
   <div class="toolbar">
-    <mat-button-toggle-group
-      #group="matButtonToggleGroup"
-      value="all"
-      class="show-pinned-all"
-    >
-      <mat-button-toggle
-        aria-label="Show all notes"
-        matTooltip="All Notes"
-        matTooltipPosition="above"
-        (click)="showPinned('all')"
-        value="all"
-      >
-        <mat-icon>view_module</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle
-        aria-label="Show pinned notes"
-        matTooltip="Pinned Notes"
-        matTooltipPosition="above"
-        (click)="showPinned('pin')"
-        value="pin"
-      >
-        <mat-icon class="rotate">push_pin</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+    <div class="tools">
+      <!-- filter notes by color -->
+      <div class="search-by-color">
+        <mat-form-field appearance="outline" class="color-select">
+          <mat-label>Filter notes by color(s)</mat-label>
+          <mat-select [formControl]="colors" multiple>
+            <mat-option
+              *ngFor="let color of colorList"
+              (click)="filterByColors()"
+              [value]="color.code"
+              >{{ color.value }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <div class="search-by-color">
-      <mat-form-field appearance="outline" class="color-select">
-        <mat-label>Filter notes by color(s)</mat-label>
-        <mat-select [formControl]="colors" multiple>
-          <mat-option
-            *ngFor="let color of colorList"
-            (click)="filterByColors()"
-            [value]="color.code"
-            >{{ color.value }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+      <!-- all/pinned/archived notes -->
+      <mat-button-toggle-group
+        #group="matButtonToggleGroup"
+        value="all"
+        class="show-pinned-all"
+      >
+        <mat-button-toggle
+          aria-label="Show all notes"
+          matTooltip="All Notes"
+          matTooltipPosition="above"
+          (click)="showAllNotes()"
+          value="all"
+        >
+          <mat-icon>view_module</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle
+          aria-label="Show archived notes"
+          matTooltip="Archived Notes"
+          matTooltipPosition="above"
+          (click)="showArchivedNotes()"
+          value="archive"
+        >
+          <mat-icon>archive</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle
+          aria-label="Show pinned notes"
+          matTooltip="Pinned Notes"
+          matTooltipPosition="above"
+          (click)="showPinnedNotes()"
+          value="pin"
+        >
+          <mat-icon class="rotate">push_pin</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- sync button -->
+      <button
+        mat-mini-fab
+        aria-label="Sync all notes"
+        color="accent"
+        class="pull-right sync"
+        matTooltip="Sync All Notes"
+        matTooltipPosition="above"
+        (click)="onSync()"
+      >
+        <mat-icon class="sync-icon">sync</mat-icon>
+      </button>
     </div>
   </div>
 
@@ -50,23 +82,27 @@
     matTooltip="Add New Note"
     matTooltipShowDelay="1000"
     matTooltipPosition="left"
+    aria-label="Add a new note"
   >
     <mat-icon class="add">add</mat-icon>
   </button>
 
   <ng-container *ngIf="empty; else nonEmptyTemplate">
     <div class="empty-outer">
+      <span class="empty" *ngIf="showArchived">
+        No archived notes to show
+      </span>
       <span class="empty" *ngIf="showAll">
         You don't have any notes<br /><br /><br />Add one by clicking add button
       </span>
-      <span class="empty" *ngIf="!showAll">
+      <span class="empty" *ngIf="showPinned">
         You don't have any pinned notes<br /><br /><br />Add one by clicking pin
         icon at the bottom of a note
       </span>
     </div>
   </ng-container>
   <ng-template #nonEmptyTemplate>
-    <div class="row notes-container">
+    <div class="row notes-container" *ngIf="!empty">
       <div *ngFor="let note of notes" @fadeIn class="note-div">
         <app-note
           [id]="note.id"
@@ -75,6 +111,7 @@
           [activeColor]="note.color"
           [locked]="note.locked"
           [pinned]="note.pinned"
+          (notifyParent)="updateNotes($event)"
         ></app-note>
       </div>
     </div>

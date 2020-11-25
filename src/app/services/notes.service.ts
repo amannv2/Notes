@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Note } from '../all-notes/note/note.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({ providedIn: 'root' })
 export class NotesService {
@@ -12,20 +13,26 @@ export class NotesService {
   readonly owner = this.cookieService.get('uname');
 
   constructor(
-    private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private cookieService: CookieService
+    private httpService: HttpService,
+    private cookieService: CookieService,
+    private authService: AuthServiceService
   ) {
-    this.httpService.sendGetRequest('/notes/' + this.owner).subscribe(
-      (data: Note[]) => {
-        this.serverDown = false;
-        this.notes = data;
-      },
-      (err: any) => {
-        this.serverDown = true;
-        // console.log(err);
-      }
-    );
+    this.httpService
+      .sendPostRequest(
+        '/notes/' + this.owner,
+        JSON.stringify({ pass: this.authService.getSecret() })
+      )
+      .subscribe(
+        (data: Note[]) => {
+          this.serverDown = false;
+          this.notes = data;
+        },
+        (err: any) => {
+          this.serverDown = true;
+          // console.log(err);
+        }
+      );
   }
 
   generateSnack(message: string, action: string): void {
@@ -35,31 +42,48 @@ export class NotesService {
     });
   }
 
-  updateNote(note: Note): Observable<{}> {
-    const id = note.id;
+  updateNote(newNote: Note): void {
+    const id = newNote.id;
 
-    return this.httpService.sendPatchRequest(
-      '/note/' + id,
-      JSON.stringify(note)
-    );
+    const body = {
+      note: newNote,
+      pass: this.authService.getSecret(),
+    };
+
+    this.httpService
+      .sendPatchRequest('/note/' + id, JSON.stringify(body))
+      .subscribe((res) => {
+        // console.log(res);
+      });
   }
 
   addNew(): void {
-    this.notes.push(new Note(0, '', '', '#0e9aa7', false, false, this.owner));
+    this.notes.push(
+      new Note(0, '', '', '#0e9aa7', false, false, false, this.owner)
+    );
 
-    const body = this.notes[this.notes.length - 1];
+    const body = {
+      note: this.notes[this.notes.length - 1],
+      pass: this.authService.getSecret(),
+    };
+    const user = this.authService.getUsername();
+
     this.httpService
-      .sendPostRequest('/notes', JSON.stringify(body))
+      .sendPostRequest('/note/' + user, JSON.stringify(body))
       .subscribe((data: any) => {
         this.notes[this.notes.length - 1].id = data._id;
-        this.updateNote(body).subscribe((res: any) => {
-          // console.log(res);
-        });
+        this.updateNote(body.note);
       });
   }
 
   getNotes(): Observable<{}> {
-    return this.httpService.sendGetRequest('/notes/' + this.owner);
+    const body = {
+      pass: this.authService.getSecret(),
+    };
+    return this.httpService.sendPostRequest(
+      '/notes/' + this.owner,
+      JSON.stringify(body)
+    );
   }
 
   deleteNote(targetId: any): void {
@@ -85,9 +109,7 @@ export class NotesService {
     this.notes.forEach((element) => {
       if (element.id === targetId) {
         element.title = title;
-        this.updateNote(element).subscribe((data: any) => {
-          // console.log(data);
-        });
+        this.updateNote(element);
       }
     });
   }
@@ -106,9 +128,7 @@ export class NotesService {
     this.notes.forEach((element) => {
       if (element.id === targetId) {
         element.content = content;
-        this.updateNote(element).subscribe((data: any) => {
-          // console.log(data);
-        });
+        this.updateNote(element);
       }
     });
   }
@@ -127,9 +147,7 @@ export class NotesService {
     this.notes.forEach((element) => {
       if (element.id === targetId) {
         element.color = color;
-        this.updateNote(element).subscribe((data: any) => {
-          // console.log(data);
-        });
+        this.updateNote(element);
       }
     });
   }
@@ -144,13 +162,31 @@ export class NotesService {
     return color;
   }
 
+  archiveNote(targetId: number, status: boolean, pin: boolean): void {
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        element.archived = status;
+        element.pinned = pin;
+        this.updateNote(element);
+      }
+    });
+  }
+
+  getArchivedStatus(targetId: number): boolean {
+    let status = false;
+    this.notes.forEach((element) => {
+      if (element.id === targetId) {
+        status = element.archived;
+      }
+    });
+    return status;
+  }
+
   setLock(targetId: number, status: boolean): void {
     this.notes.forEach((element) => {
       if (element.id === targetId) {
         element.locked = status;
-        this.updateNote(element).subscribe((data: any) => {
-          // console.log(data);
-        });
+        this.updateNote(element);
       }
     });
   }
@@ -169,9 +205,7 @@ export class NotesService {
     this.notes.forEach((element) => {
       if (element.id === targetId) {
         element.pinned = status;
-        this.updateNote(element).subscribe((data: any) => {
-          // console.log(data);
-        });
+        this.updateNote(element);
       }
     });
   }

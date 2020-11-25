@@ -94,6 +94,7 @@
       class="pull-right lock-btn"
       aria-label="Pin Note"
       (click)="onPin()"
+      *ngIf="!archived"
     >
       <ng-container *ngIf="!pinned; else elsePin">
         <mat-icon fontSet="material-icons-outlined">push_pin</mat-icon>
@@ -116,6 +117,17 @@
       <ng-template #elseDelete>
         <mat-icon>lock_open</mat-icon>
       </ng-template>
+    </button>
+
+    <button
+      mat-mini-fab
+      [matTooltip]="this.archiveTooltip"
+      color="accent"
+      class="pull-right lock-btn"
+      aria-label="Archive Note"
+      (click)="onArchive()"
+    >
+      <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
     </button>
   </mat-card-footer>
 </mat-card>

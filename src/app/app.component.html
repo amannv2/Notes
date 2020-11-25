@@ -4,11 +4,21 @@
   fullscreen
   autosize
 >
-  <mat-sidenav #sidenav class="page-sidenav" mode="side" opened="true">
+  <mat-sidenav
+    #sidenav
+    class="page-sidenav"
+    mode="side"
+    opened="true"
+    *ngIf="loggedIn()"
+  >
     <mat-nav-list>
       <mat-list-item (click)="opened = !opened">
         <div class="nav-container">
-          <button mat-icon-button matTooltipShowDelay="1000">
+          <button
+            mat-icon-button
+            matTooltipShowDelay="1000"
+            aria-label="Open sidebar"
+          >
             <mat-icon *ngIf="!opened">chevron_right</mat-icon>
             <mat-icon *ngIf="opened">chevron_left</mat-icon>
           </button>
