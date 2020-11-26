@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606303782213,
+  "timestamp": 1606370179433,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/env.js",
         "/favicon.ico",
         "/index.html",
-        "/main.9352b4efc4f2f67309de.js",
+        "/main.f53b83906535011ca915.js",
         "/manifest.webmanifest",
         "/polyfills.a4021de53358bb0fec14.js",
         "/runtime.91c9b6e9c1ce6c25ab98.js",
@@ -58,9 +58,7 @@
   "dataGroups": [
     {
       "name": "notes",
-      "patterns": [
-        "http:\\/\\/localhost:3000\\/notes"
-      ],
+      "patterns": ["http:\\/\\/localhost:3000\\/notes"],
       "strategy": "freshness",
       "maxSize": 10,
       "maxAge": 172800000,
@@ -87,8 +85,8 @@
     "/glyphicons-halflings-regular.5be1347c682810f199c7.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
     "/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
     "/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
-    "/index.html": "0f210a38c61ce4dff628e22525e3b760aa6b0e20",
-    "/main.9352b4efc4f2f67309de.js": "534eb17b6bbd58444a5469f4d72d71310c6a2aa1",
+    "/index.html": "f56f04717d690c48295b931c75886e54283c04b4",
+    "/main.f53b83906535011ca915.js": "2fdb1531f77a5f660add9a2d2c3b8df0082d03ff",
     "/manifest.webmanifest": "d15224818253cbfa0d9b982c31930c94cf32dbba",
     "/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "/runtime.91c9b6e9c1ce6c25ab98.js": "1b0d3eed38bab4c99f626060f0f3f81c68ca9a4f",

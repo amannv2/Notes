@@ -75,6 +75,7 @@
   </div>
 
   <button
+    *ngIf="!(showArchived || showPinned)"
     [ngClass]="empty ? 'breathing-button shadow' : 'add-new shadow'"
     mat-fab
     color="accent"

@@ -51,7 +51,10 @@ export class NotesService {
     };
 
     this.httpService
-      .sendPatchRequest('/note/' + id, JSON.stringify(body))
+      .sendPatchRequest(
+        '/note/' + id + '/' + this.authService.getUsername(),
+        JSON.stringify(body)
+      )
       .subscribe((res) => {
         // console.log(res);
       });
@@ -72,7 +75,7 @@ export class NotesService {
       .sendPostRequest('/note/' + user, JSON.stringify(body))
       .subscribe((data: any) => {
         this.notes[this.notes.length - 1].id = data._id;
-        this.updateNote(body.note);
+        console.log(this.notes[this.notes.length - 1]);
       });
   }
 
