@@ -256,7 +256,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 5;
+  z-index: 99999999;
   backdrop-filter: saturate(130%) blur(3px);
   -webkit-backdrop-filter: saturate(130%) blur(3px);
 }

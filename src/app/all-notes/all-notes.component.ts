@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-notes',

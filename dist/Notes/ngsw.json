@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606370179433,
+  "timestamp": 1606376247581,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/env.js",
         "/favicon.ico",
         "/index.html",
-        "/main.f53b83906535011ca915.js",
+        "/main.67afd42b806fc76f818b.js",
         "/manifest.webmanifest",
         "/polyfills.a4021de53358bb0fec14.js",
         "/runtime.91c9b6e9c1ce6c25ab98.js",
@@ -43,7 +43,6 @@
         "/assets/icons/quick-notes-512.png",
         "/assets/icons/quick-notes-72.png",
         "/assets/icons/quick-notes-96.png",
-        "/assets/images/bell.png",
         "/assets/screenshots/1.png",
         "/assets/screenshots/2.png",
         "/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
@@ -58,7 +57,9 @@
   "dataGroups": [
     {
       "name": "notes",
-      "patterns": ["http:\\/\\/localhost:3000\\/notes"],
+      "patterns": [
+        "http:\\/\\/localhost:3000\\/notes"
+      ],
       "strategy": "freshness",
       "maxSize": 10,
       "maxAge": 172800000,
@@ -75,9 +76,8 @@
     "/assets/icons/quick-notes-512.png": "dca39de441718954ee796d90e4fa76c59c8d7820",
     "/assets/icons/quick-notes-72.png": "80cc35cbfbc9b1e66669db48108867ab0ff49548",
     "/assets/icons/quick-notes-96.png": "4c8fd9dc536b41da11510fd6610415da5652d6bf",
-    "/assets/images/bell.png": "3b7dd9a2f69deebbb4759fa481861fe63a705d1c",
-    "/assets/screenshots/1.png": "71d514cab87faadad4108fefb3f8428dbb7fb419",
-    "/assets/screenshots/2.png": "944898392c8614833dc7bfd4c1330d6ea39273f2",
+    "/assets/screenshots/1.png": "005c3bc60f92decb44ae15407862f589433bef56",
+    "/assets/screenshots/2.png": "fe6a62ac71da82a3d64a324eb4e7c3cd0ca11e0b",
     "/env.js": "135a40dbfaeb90d720821ee71088937b28ead343",
     "/favicon.ico": "cb16d8474f2b3497525ee3dba04a82ee9829a2ef",
     "/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg": "de51a8494180a6db074af2dee2383f0a363c5b08",
@@ -85,8 +85,8 @@
     "/glyphicons-halflings-regular.5be1347c682810f199c7.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
     "/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
     "/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
-    "/index.html": "f56f04717d690c48295b931c75886e54283c04b4",
-    "/main.f53b83906535011ca915.js": "2fdb1531f77a5f660add9a2d2c3b8df0082d03ff",
+    "/index.html": "00d010285605b62f1040a3f855c5b9beec51683b",
+    "/main.67afd42b806fc76f818b.js": "ba60f908c7db16cdc9ccb5da7feed8f9def1667b",
     "/manifest.webmanifest": "d15224818253cbfa0d9b982c31930c94cf32dbba",
     "/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "/runtime.91c9b6e9c1ce6c25ab98.js": "1b0d3eed38bab4c99f626060f0f3f81c68ca9a4f",
