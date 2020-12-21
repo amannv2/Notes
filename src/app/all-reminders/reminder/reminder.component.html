@@ -24,58 +24,31 @@
       class="pull-right save-btn top-right"
       aria-label="Save Reminder"
       tabindex="9"
+      (click)="saveReminder()"
     >
       <mat-icon class="close-btn">save</mat-icon>
     </button>
   </mat-card-header>
 
   <mat-card-footer class="footer">
-    <button
-      [ngClass]="pm ? 'am-pm-active' : 'am'"
-      class="pm pull-right"
-      tabindex="6"
-      (click)="setAmPm()"
-      mat-icon-button
-    >
-      PM
-    </button>
-    <button
-      [ngClass]="am ? 'am-pm-active' : 'am'"
-      class="am pull-right"
-      tabindex="5"
-      (click)="setAmPm()"
-      mat-icon-button
-    >
-      AM
-    </button>
-
-    <mat-form-field appearance="fill" class="reminder-min">
-      <mat-label>Minute</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let min of mins" [value]="min.value">
-          {{ min.value }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="reminder-hour">
-      <mat-label>Hour</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let hour of hours" [value]="hour.value">
-          {{ hour.value }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="reminder-input pull-right" appearance="fill">
-      <mat-label>Remind me on</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        (click)="picker.open()"
-        tabindex="4"
-      />
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <div class="time">
+      <mat-form-field>
+        <input
+          matInput
+          [ngxMatDatetimePicker]="picker"
+          placeholder="Remind me at"
+          [formControl]="dateControl"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker
+          #picker
+          showSpinners="true"
+          showSeconds="true"
+          color="primary"
+          enableMeridian="false"
+        >
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+    </div>
   </mat-card-footer>
 </mat-card>

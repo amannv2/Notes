@@ -20,13 +20,20 @@ export class AllRemindersComponent implements OnInit {
   reminders: Reminder[] = [];
 
   constructor(private remindersService: RemindersService) {
-    this.reminders = this.remindersService.getReminders();
+    setInterval(() => {
+      this.reminders = this.remindersService.reminders;
+      console.log(this.reminders);
+    }, 500);
+    // this.remindersService.getReminders().subscribe((data: Reminder[]) => {
+    //   this.reminders = data;
+    // });
   }
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.reminders = this.remindersService.reminders;
-    }, 500);
+    // const audio = new Audio();
+    // audio.src = '../assets/sounds/alert.mp3';
+    // audio.load();
+    // audio.play();
   }
 
   addNew(): void {

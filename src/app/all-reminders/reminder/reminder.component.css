@@ -20,20 +20,6 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.am {
-  margin-top: 5px;
-}
-
-.pm {
-  margin-top: 5px;
-  margin-right: 10px;
-}
-
-.am-pm-active {
-  color: black;
-  background-color: rgba(99, 98, 98, 0.349);
-}
-
 .reminder-input {
   width: 23% !important;
   margin-right: 5px;
@@ -62,4 +48,9 @@
 
 .save-btn:hover {
   opacity: 1;
+}
+
+.time {
+  float: right;
+  margin-right: 3%;
 }

@@ -14,7 +14,7 @@ Click here for a live [demo](http://13.127.174.246/)
 
 ## Open Issues
 
-1. Multiple color filter is not supported
+1. ~~Multiple color filter is not supported~~
 2. Canvas drawing can only be downloaded
 3. Reminders are not functional
 

@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { CookieService } from 'ngx-cookie-service';
 
 import { QuillModule } from 'ngx-quill';
-import { environment } from '../environments/environment';
 import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
+
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { DrawComponent } from './draw/draw.component';
@@ -22,8 +24,6 @@ import { AllRemindersComponent } from './all-reminders/all-reminders.component';
 import { ReminderComponent } from './all-reminders/reminder/reminder.component';
 import { ServerDownComponent } from './error/server-down/server-down.component';
 
-import { CookieService } from 'ngx-cookie-service';
-
 import { HttpService } from './services/http.service';
 import { NotesService } from './services/notes.service';
 import { EnvServiceProvider } from './env.service.provider';
@@ -35,6 +35,12 @@ import { PushNotificationsService } from './services/notification.service';
 
 import { AppRoutingModule } from './modules/app-routing.module';
 import { AppMaterialModule } from './modules/app-material.module';
+
+import {
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+  NgxMatDatetimePickerModule,
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -57,7 +63,10 @@ import { AppMaterialModule } from './modules/app-material.module';
     AppMaterialModule,
     ReactiveFormsModule,
     CanvasWhiteboardModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
     BrowserAnimationsModule,
+    NgxMatDatetimePickerModule,
     QuillModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
