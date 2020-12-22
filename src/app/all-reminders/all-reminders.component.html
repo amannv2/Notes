@@ -6,7 +6,7 @@
     mat-fab
     color="accent"
     (click)="addNew()"
-    matTooltip="Add New Note"
+    matTooltip="Add New Reminder"
     matTooltipShowDelay="1000"
     matTooltipPosition="left"
   >
@@ -17,7 +17,7 @@
       <app-reminder
         [id]="reminder.id"
         [content]="reminder.content"
-        [time]="reminder.time"
+        [fullTime]="reminder.time"
       ></app-reminder>
     </div>
   </div>

@@ -10,6 +10,14 @@ An alternate to Window's Sticky Notes with a wide range of features like:
 
 It also supports drawing on a canvas.
 
+Click here for a live [demo](http://13.127.174.246/)
+
+## Open Issues
+
+1. ~~Multiple color filter is not supported~~
+2. Canvas drawing can only be downloaded
+3. Reminders are not functional
+
 ## How to run?
 
 ### Setup Front-End:
@@ -37,7 +45,5 @@ It also supports drawing on a canvas.
 
 ## Screenshots
 
-> Old screenshots, newer ones are on their way
-
-![Picture 1](./src/assets/screenshots/1.png)
 ![Picture 2](./src/assets/screenshots/2.png)
+![Picture 1](./src/assets/screenshots/1.png)

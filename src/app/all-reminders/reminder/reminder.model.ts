@@ -1,11 +1,13 @@
 export class Reminder {
-  id: number;
-  time: string;
+  id: string;
   content: string;
+  time: Date;
+  owner: string;
 
-  constructor(id: number, content: string, time: string) {
+  constructor(id: string, content: string, time: Date, owner: string) {
     this.id = id;
-    this.time = time;
     this.content = content;
+    this.time = time;
+    this.owner = owner;
   }
 }

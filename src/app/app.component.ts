@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { RemindersService } from './services/reminders.service';
 import { AuthServiceService } from './services/auth-service.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   uname = this.authService.getUsername();
 
   constructor(
+    private reminderService: RemindersService,
     private authService: AuthServiceService,
     private router: Router
   ) {}

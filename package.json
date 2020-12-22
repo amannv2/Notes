@@ -1,6 +1,6 @@
 {
   "name": "notes",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "electron": "electron ./src/electron.dev",
@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^4.0.5",
     "@angular/animations": "~10.0.2",
     "@angular/cdk": "^10.0.0",
     "@angular/common": "~10.0.2",

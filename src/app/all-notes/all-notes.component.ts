@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-notes',
@@ -138,11 +137,12 @@ export class AllNotesComponent implements OnInit {
   filterByColors(): void {
     if (this.colors.value.length === 0) {
       this.filter = false;
+      this.loadNotes();
     } else {
       this.filter = true;
 
-      this.notes = this.notes.filter(({ color }) =>
-        this.colors.value.includes(color)
+      this.notes = this.notesService.notes.filter(
+        ({ color, archived }) => this.colors.value.includes(color) && !archived
       );
     }
   }

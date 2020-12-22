@@ -1,55 +1,38 @@
+import { FormControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-interface Hour {
-  value: number;
-}
-interface Minute {
-  value: number;
-}
+import { RemindersService } from 'src/app/services/reminders.service';
+
+const date = new Date();
+
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
   styleUrls: ['./reminder.component.css'],
 })
 export class ReminderComponent implements OnInit {
-  @Input() id: number;
+  @Input() id: string;
   @Input() content: string;
-  @Input() time: string;
-  remHour: string;
-  remMin: string;
-  am = true;
-  pm = false;
-  hours: Hour[] = [];
-  mins: Minute[] = [];
+  @Input() fullTime: Date;
+  dateControl: FormControl;
 
-  ngOnInit(): void {
-    for (let index = 1; index < 60; index++) {
-      if (index <= 12) {
-        this.hours.push({ value: index });
-      }
-      this.mins.push({ value: index });
-    }
+  constructor(private reminderService: RemindersService) {
+    console.log(this.fullTime);
+    this.dateControl = new FormControl(this.fullTime);
   }
 
-  setAmPm(): void {
-    this.pm = !this.pm;
-    this.am = !this.am;
-  }
-
-  setHour(hour: string): void {
-    this.remHour = hour;
-    console.log(hour);
-  }
-
-  setMin(min: string): void {
-    this.remMin = min;
-  }
+  ngOnInit(): void {}
 
   saveReminder(): void {
     console.log(this.id);
+    console.log('-------------------------');
     console.log(this.content);
-    console.log(this.remHour);
-    console.log(this.remMin);
-    console.log(this.am);
-    console.log(this.pm);
+    console.log('-------------------------');
+    console.log(this.dateControl.value);
+
+    this.reminderService.updateReminder(
+      this.id,
+      this.content,
+      this.dateControl.value
+    );
   }
 }
