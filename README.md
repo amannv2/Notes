@@ -1,3 +1,5 @@
+[![Docker Builds](https://github.com/amannv2/Notes/actions/workflows/docker.yml/badge.svg?branch=master)](https://github.com/amannv2/Notes/actions/workflows/docker.yml)
+
 # Quick Notes
 
 An alternate to Window's Sticky Notes with a wide range of features like:
