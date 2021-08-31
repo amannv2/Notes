@@ -1,3 +1,6 @@
+# Testing
+![example branch parameter](https://github.com/amannv2/Notes/actions/workflows/main.yml/badge.svg?branch=dev)
+
 # Quick Notes
 
 An alternate to Window's Sticky Notes with a wide range of features like:
