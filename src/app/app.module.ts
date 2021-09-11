@@ -83,7 +83,7 @@ import {
     EnvServiceProvider,
     ConfirmDialogService,
     PushNotificationsService,
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })
