@@ -41,7 +41,7 @@ Click here for a live [demo](http://13.127.174.246/)
 ## Run using Docker:
 
 1. Pull image from Docker hub - `docker pull amannv2/notes:latest`
-2. Run image: `docker run -d -p 80:80/tcp amannv2/notes:latest`
+2. Run image: `docker run --env API_URL="<Server_Endpoint>" -d -p 80:80/tcp amannv2/notes:latest`
    - Open `localhost:80` on a Web Browser
 3. Setup backend as mentioned [above](https://github.com/amannv2/Notes#setup-back-end)
 

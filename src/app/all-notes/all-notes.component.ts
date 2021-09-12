@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Note } from './note/note.model';
 import { FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { NotesService } from '../services/notes.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 
@@ -38,22 +38,31 @@ export class AllNotesComponent implements OnInit {
     { value: 'Red', code: '#ec524b' },
   ];
 
-  constructor(private notesService: NotesService, private router: Router) {
+  constructor(
+    private notesService: NotesService,
+    private router: Router,
+    private appRef: ApplicationRef
+  ) {
     this.notesService.getNotes().subscribe((data: []) => {
       this.notes = data;
+      this.showAllNotes();
+      this.appRef.tick();
+      this.isSyncing = false;
+      this.appRef.tick();
       // this.loadNotes();
     });
-    setTimeout(() => {
-      this.showAllNotes();
-      setTimeout(() => {
-        this.isSyncing = false;
-      }, 400);
-    }, 600);
+    // setTimeout(() => {
+    //   this.showAllNotes();
+    //   setTimeout(() => {
+    //     this.isSyncing = false;
+    //   }, 400);
+    // }, 600);
   }
 
   loadNotes(): void {
     if (this.notesService.serverDown) {
       // this.router.navigate(['/maintenance']);
+      alert('Server down');
     }
 
     if (
@@ -110,6 +119,7 @@ export class AllNotesComponent implements OnInit {
     this.showArchived = false;
     this.notes = this.notesService.notes;
     this.loadNotes();
+    this.appRef.tick();
   }
 
   showArchivedNotes(): void {
@@ -152,9 +162,9 @@ export class AllNotesComponent implements OnInit {
     this.notes.forEach((note) => {
       this.notesService.updateNote(note);
     });
-    setTimeout(() => {
-      this.isSyncing = false;
-    }, 3000);
+    this.isSyncing = false;
+    // setTimeout(() => {
+    // }, 3000);
   }
 
   updateNotes(event: any): void {
